@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Engine">
+      <UniqueIdentifier>{95e904bd-22ac-4772-8c0d-6afc2dc4acbf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Engine">
+      <UniqueIdentifier>{cfba481f-b87d-4534-8527-d8dcfa36a815}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\SpaceWar">
+      <UniqueIdentifier>{77748ae0-beb2-4c65-9c9c-6b3822541115}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Main Menu">
+      <UniqueIdentifier>{e2c021ff-68b4-414c-ae2e-f67264cbb1d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Spacewar">
+      <UniqueIdentifier>{e73a35ea-1959-4a54-bcf6-59e9be624e35}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\MainMenu">
+      <UniqueIdentifier>{d1811b4d-1c0b-4624-a772-8fb517174a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Greed Level 4">
+      <UniqueIdentifier>{c57c03f7-8cef-4045-8242-e5f68a6aa7e4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level 1">
+      <UniqueIdentifier>{8aa25cd4-351f-4dd1-abc6-db9dd31f90a5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level 1">
+      <UniqueIdentifier>{72cccde8-cae3-4c5f-acf9-bd6acdd850a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
+    </Filter>
+    <Filter Include="Source Files\Level 4">
+      <UniqueIdentifier>{9ecf3469-63d5-400a-89e1-5bcfd876f322}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="winmain.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="audio.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="console.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="dashboard.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="entity.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="graphics.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="image.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="inputDialog.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="messageDialog.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="textDX.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="textureManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="planet.cpp">
+      <Filter>Source Files\Spacewar</Filter>
+    </ClCompile>
+    <ClCompile Include="ship.cpp">
+      <Filter>Source Files\Spacewar</Filter>
+    </ClCompile>
+    <ClCompile Include="spacewar.cpp">
+      <Filter>Source Files\Spacewar</Filter>
+    </ClCompile>
+    <ClCompile Include="torpedo.cpp">
+      <Filter>Source Files\Spacewar</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>Source Files\MainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="Level1.cpp">
+      <Filter>Source Files\Level 1</Filter>
+    </ClCompile>
+    <ClCompile Include="Bum.cpp">
+      <Filter>Source Files\Level 1</Filter>
+    </ClCompile>
+    <ClCompile Include="Background.cpp">
+      <Filter>Source Files\Level 1</Filter>
+    </ClCompile>
+    <ClCompile Include="Card.cpp">
+      <Filter>Source Files\Level 4</Filter>
+    </ClCompile>
+    <ClCompile Include="GreedLevel.cpp">
+      <Filter>Source Files\Level 4</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="audio.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="console.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="constants.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="dashboard.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="entity.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="gameError.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="graphics.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="inputDialog.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="messageDialog.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="textDX.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="textureManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="planet.h">
+      <Filter>Header Files\SpaceWar</Filter>
+    </ClInclude>
+    <ClInclude Include="torpedo.h">
+      <Filter>Header Files\SpaceWar</Filter>
+    </ClInclude>
+    <ClInclude Include="ship.h">
+      <Filter>Header Files\SpaceWar</Filter>
+    </ClInclude>
+    <ClInclude Include="spacewar.h">
+      <Filter>Header Files\SpaceWar</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>Header Files\Main Menu</Filter>
+    </ClInclude>
+    <ClInclude Include="GreedLevel.h">
+      <Filter>Header Files\Greed Level 4</Filter>
+    </ClInclude>
+    <ClInclude Include="Bum.h">
+      <Filter>Header Files\Level 1</Filter>
+    </ClInclude>
+    <ClInclude Include="background.h">
+      <Filter>Header Files\Level 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Level1.h">
+      <Filter>Header Files\Level 1</Filter>
+    </ClInclude>
+    <ClInclude Include="LostSoul.h">
+      <Filter>Header Files\Level 1</Filter>
+    </ClInclude>
+    <ClInclude Include="Card.h">
+      <Filter>Header Files\Greed Level 4</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+</Project>
