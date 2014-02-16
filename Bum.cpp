@@ -7,7 +7,6 @@ Bum::Bum() :Entity()
 	spriteData.width=BumNS::WIDTH;
 	spriteData.height=BumNS::HEIGHT;
 	velocity.x=0;
-	//velocity.z=0;
 	velocity.y=0;
 	frameDelay=BumNS::BUM_ANIMATION_DELAY;
 	startFrame= BumNS::BUM_START_FRAME;
