@@ -13,8 +13,9 @@ Bum::Bum() :Entity()
 	startFrame= BumNS::BUM_START_FRAME;
 	endFrame=BumNS::BUM_END_FRAME;
 	currentFrame=startFrame;
-	moveing=false;
+	moving=false;
 }
+
 bool Bum::initialize(Game *gamePtr,int width,int height,int ncols,
 	TextureManager *textureM)
 {
@@ -33,7 +34,7 @@ void Bum::draw()
 void Bum::update(float frameTime)
 {
 	
-	if(moveing)
+	if(moving)
 	{
 		if(movingL){velocity.x -= BumNS::SPEED * frameTime;}
 		if(movingR){velocity.x += BumNS::SPEED * frameTime;}
@@ -47,7 +48,7 @@ void Bum::update(float frameTime)
 }
 void Bum::setmoving(bool m)
 {
-	moveing=m;
+	moving=m;
 }
 
 void Bum::setDirectL(bool L)

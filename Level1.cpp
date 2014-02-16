@@ -16,7 +16,7 @@ void Level1::initialize(HWND hwnd)
 	 if (!BgTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializingbackground"));
 	//
-	 if (!PlayerTextures.initialize(graphics,"pictures\\ghoul1.jpg"))
+	 if (!PlayerTextures.initialize(graphics,"ArtAssets\\Jeramiah.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 	//
 	if (!background.initialize(this, BgNS::WIDTH, BgNS::HEIGHT, &BgTexture))
