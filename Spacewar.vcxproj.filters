@@ -24,12 +24,6 @@
     <Filter Include="Source Files\Spacewar">
       <UniqueIdentifier>{e73a35ea-1959-4a54-bcf6-59e9be624e35}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\MainMenu">
-      <UniqueIdentifier>{d1811b4d-1c0b-4624-a772-8fb517174a95}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\Greed Level 4">
-      <UniqueIdentifier>{c57c03f7-8cef-4045-8242-e5f68a6aa7e4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Level 1">
       <UniqueIdentifier>{8aa25cd4-351f-4dd1-abc6-db9dd31f90a5}</UniqueIdentifier>
     </Filter>
@@ -40,8 +34,14 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav</Extensions>
     </Filter>
-    <Filter Include="Source Files\Level 4">
+    <Filter Include="Source Files\Level 0 - MainMenu">
+      <UniqueIdentifier>{d1811b4d-1c0b-4624-a772-8fb517174a95}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level 4 - Greed">
       <UniqueIdentifier>{9ecf3469-63d5-400a-89e1-5bcfd876f322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level 4 - Greed">
+      <UniqueIdentifier>{c57c03f7-8cef-4045-8242-e5f68a6aa7e4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -103,10 +103,10 @@
       <Filter>Source Files\Spacewar</Filter>
     </ClCompile>
     <ClCompile Include="MainMenu.cpp">
-      <Filter>Source Files\MainMenu</Filter>
+      <Filter>Source Files\Level 0 - MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="Button.cpp">
-      <Filter>Source Files\MainMenu</Filter>
+      <Filter>Source Files\Level 0 - MainMenu</Filter>
     </ClCompile>
     <ClCompile Include="Level1.cpp">
       <Filter>Source Files\Level 1</Filter>
@@ -118,10 +118,10 @@
       <Filter>Source Files\Level 1</Filter>
     </ClCompile>
     <ClCompile Include="Card.cpp">
-      <Filter>Source Files\Level 4</Filter>
+      <Filter>Source Files\Level 4 - Greed</Filter>
     </ClCompile>
     <ClCompile Include="GreedLevel.cpp">
-      <Filter>Source Files\Level 4</Filter>
+      <Filter>Source Files\Level 4 - Greed</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -192,7 +192,7 @@
       <Filter>Header Files\Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="GreedLevel.h">
-      <Filter>Header Files\Greed Level 4</Filter>
+      <Filter>Header Files\Level 4 - Greed</Filter>
     </ClInclude>
     <ClInclude Include="Bum.h">
       <Filter>Header Files\Level 1</Filter>
@@ -207,7 +207,7 @@
       <Filter>Header Files\Level 1</Filter>
     </ClInclude>
     <ClInclude Include="Card.h">
-      <Filter>Header Files\Greed Level 4</Filter>
+      <Filter>Header Files\Level 4 - Greed</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

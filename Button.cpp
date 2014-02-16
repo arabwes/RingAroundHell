@@ -29,8 +29,8 @@ bool Button::Update()
 	if(input->getMouseLButton())
 	{ 
 		if(input->getMouseX() > spriteData.x &&		//If Button was clicked then
-			input->getMouseX() < spriteData.x + spriteData.rect.right &&	//clicked flag is changed and 
-			input->getMouseY() < spriteData.y + spriteData.rect.bottom &&		//click event is called
+			input->getMouseX() < spriteData.x + spriteData.width &&	//clicked flag is changed and 
+			input->getMouseY() < spriteData.y + spriteData.height &&		//click event is called
 			input->getMouseY() > spriteData.y)
 		{
 			input->setMouseLButton(false);

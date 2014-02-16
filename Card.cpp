@@ -28,6 +28,15 @@ Card::~Card()
 	
 }
 
+void Card::Initialize(Graphics *graphics, Game* game)
+{
+	if (!texMan.initialize(graphics,fileName))
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card textures"));
+
+	if(!this->initialize(game, 71, 96, 1, &texMan))
+	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card texture"));
+}
+
 string Card::UpdateFace(bool ShowFace)
 {
 	if(ShowFace)

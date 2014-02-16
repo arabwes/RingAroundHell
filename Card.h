@@ -30,7 +30,7 @@ public:
 	bool Selected;			// Flag to recognize if a card has been selected or not
 	int GetValue();			// Returns Value of card
 	string UpdateFace(bool ShowFace);
-
+	void Initialize(Graphics *graphics, Game * game);
 	void Reposition(int x, int y);
 	Card();
 	Card(string TempFName, string TempName, string TempSuit, int TempVal, int TempNum, string File, string facedown);  //Creates Card
