@@ -3,19 +3,20 @@
 #include "Level1.h"
 #include "MainMenu.h"
 #include "GreedLevel.h"
+#include "Level7.h"
 
 LevelManager::LevelManager()
 {	
 	//Initialize();
 	//To add more levels change numOfLvls and edit LevelFactory
 	currentLvlNum = 0;
-	numOfLvls = 4;
+	numOfLvls = 5;
 	for(int i = 0; i < numOfLvls; i++)
 	{
 		levels.push_back(LevelFactory(i));
 	}
 	//To demonstrate a level: change number to 2 or 3 depending on if you put both of your lvls in there
-	currentLevel = levels[0];
+	currentLevel = levels[4];
 }
 
 LevelManager::~LevelManager()
@@ -107,6 +108,10 @@ Game* LevelManager::LevelFactory(int lvl)
 		break;
 	case 3:
 		tGame = new Spacewar;
+		break;
+	case 4:
+		tGame = new Level7();
+		break;
 	default:
 		break;
 	};

@@ -94,6 +94,7 @@
     <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
+    <ClCompile Include="Character.cpp" />
     <ClCompile Include="console.cpp" />
     <ClCompile Include="dashboard.cpp" />
     <ClCompile Include="entity.cpp" />
@@ -103,6 +104,7 @@
     <ClCompile Include="inputDialog.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level1.cpp" />
+    <ClCompile Include="Level7.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
@@ -122,10 +124,12 @@
     <ClInclude Include="Bum.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="Card.h" />
+    <ClInclude Include="Character.h" />
     <ClInclude Include="console.h" />
     <ClInclude Include="constants.h" />
     <ClInclude Include="dashboard.h" />
     <ClInclude Include="entity.h" />
+    <ClInclude Include="Fighter.h" />
     <ClInclude Include="gameError.h" />
     <ClInclude Include="game.h" />
     <ClInclude Include="graphics.h" />
@@ -133,6 +137,7 @@
     <ClInclude Include="inputDialog.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level1.h" />
+    <ClInclude Include="Level7.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="LostSoul.h" />
     <ClInclude Include="MainMenu.h" />
@@ -145,6 +150,7 @@
     <ClInclude Include="image.h" />
     <ClInclude Include="textDX.h" />
     <ClInclude Include="torpedo.h" />
+    <ClInclude Include="Witch.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
