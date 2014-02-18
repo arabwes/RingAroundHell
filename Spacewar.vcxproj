@@ -91,7 +91,6 @@
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="Background.cpp" />
-    <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -103,12 +102,14 @@
     <ClCompile Include="GreedLevel.cpp" />
     <ClCompile Include="inputDialog.cpp" />
     <ClCompile Include="InputManager.cpp" />
-    <ClCompile Include="Level1.cpp" />
     <ClCompile Include="Level7.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
     <ClCompile Include="spacewar.cpp" />
+    <ClCompile Include="SSEnemy.cpp" />
+    <ClCompile Include="SSgame.cpp" />
+    <ClCompile Include="SSplayer.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="planet.cpp" />
@@ -136,13 +137,13 @@
     <ClInclude Include="GreedLevel.h" />
     <ClInclude Include="inputDialog.h" />
     <ClInclude Include="InputManager.h" />
-    <ClInclude Include="Level1.h" />
     <ClInclude Include="Level7.h" />
     <ClInclude Include="LevelManager.h" />
-    <ClInclude Include="LostSoul.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="messageDialog.h" />
     <ClInclude Include="spacewar.h" />
+    <ClInclude Include="SSenemy.h" />
+    <ClInclude Include="SSgame.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="planet.h" />

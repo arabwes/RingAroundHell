@@ -1,5 +1,5 @@
-#ifndef Level1_H           
-#define Level1_H       
+#ifndef SSGAME_H           
+#define SSGAME_H       
 #define WIN32_LEAN_AND_MEAN
 
 #include <string>
@@ -9,20 +9,21 @@
 #include "dashboard.h"
 #include "background.h"
 #include "Bum.h"
-#include "Level1.h"
+#include "SSenemy.h"
 
 
-class Level1: public Game
+class SSgame: public Game
 {
 private:
-	TextureManager PlayerTextures,BgTexture;
+	TextureManager PlayerTextures,BgTexture,enemyTexture;
 	Bum player1;
 	bg background;
+	Enemy enemy;
 	bool roundOver;
 public:
-	Level1();
+	SSgame();
     // Destructor
-    virtual ~Level1();
+    virtual ~SSgame();
     // Initialize the game
     void initialize(HWND hwnd);
     void update();      // must override pure virtual from Game

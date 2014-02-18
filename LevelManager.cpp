@@ -1,6 +1,6 @@
 #include "LevelManager.h"
 #include "spacewar.h"
-#include "Level1.h"
+#include "SSgame.h"
 #include "MainMenu.h"
 #include "GreedLevel.h"
 #include "Level7.h"
@@ -101,7 +101,7 @@ Game* LevelManager::LevelFactory(int lvl)
 		tGame = new MainMenu();
 		break;
 	case 1:
-		tGame = new Level1();
+		tGame = new SSgame();
 		break;
 	case 2:
 		tGame = new GreedLevel();

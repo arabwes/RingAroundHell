@@ -114,12 +114,6 @@
     <ClCompile Include="Button.cpp">
       <Filter>Source Files\Level 0 - MainMenu</Filter>
     </ClCompile>
-    <ClCompile Include="Level1.cpp">
-      <Filter>Source Files\Level 1</Filter>
-    </ClCompile>
-    <ClCompile Include="Bum.cpp">
-      <Filter>Source Files\Level 1</Filter>
-    </ClCompile>
     <ClCompile Include="Background.cpp">
       <Filter>Source Files\Level 1</Filter>
     </ClCompile>
@@ -134,6 +128,15 @@
     </ClCompile>
     <ClCompile Include="Level7.cpp">
       <Filter>Source Files\Level 7 - Violence</Filter>
+    </ClCompile>
+    <ClCompile Include="SSEnemy.cpp">
+      <Filter>Source Files\Level 1</Filter>
+    </ClCompile>
+    <ClCompile Include="SSgame.cpp">
+      <Filter>Source Files\Level 1</Filter>
+    </ClCompile>
+    <ClCompile Include="SSplayer.cpp">
+      <Filter>Source Files\Level 1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -212,12 +215,6 @@
     <ClInclude Include="background.h">
       <Filter>Header Files\Level 1</Filter>
     </ClInclude>
-    <ClInclude Include="Level1.h">
-      <Filter>Header Files\Level 1</Filter>
-    </ClInclude>
-    <ClInclude Include="LostSoul.h">
-      <Filter>Header Files\Level 1</Filter>
-    </ClInclude>
     <ClInclude Include="Card.h">
       <Filter>Header Files\Level 4 - Greed</Filter>
     </ClInclude>
@@ -232,6 +229,12 @@
     </ClInclude>
     <ClInclude Include="Level7.h">
       <Filter>Header Files\Level 7 - Violence</Filter>
+    </ClInclude>
+    <ClInclude Include="SSenemy.h">
+      <Filter>Header Files\Level 1</Filter>
+    </ClInclude>
+    <ClInclude Include="SSgame.h">
+      <Filter>Header Files\Level 1</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
