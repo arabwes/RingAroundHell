@@ -19,25 +19,38 @@ void Level7::initialize(HWND hwnd)
 
     // LEVEL 7 FIGHTING GAME TEXTURES
     if (!wallpaper.initialize(graphics, "pictures\\HorrorWall.jpg"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Background"));
 
 	if (!protagonist.initialize(graphics, "pictures\\Ghoul.jpg"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
 
-	if (!badbitch.initialize(graphics, "pictures\\BadBitch.jpg"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+	if (!badbitch.initialize(graphics, "pictures\\BadBitch.png"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy"));
+
+	if (!bborb.initialize(graphics, "pictures\\Orb.png"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
+
+	if (!proscythe.initialize(graphics, "pictures\\Death Scythe.jpg"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy"));
 
     // menu image
     if (!wall.initialize(graphics,0,0,0,&wallpaper))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Wall"));
 
 	// menu image
     if (!pro.initialize(graphics,0,0,0, &protagonist))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Character"));
 
 	// menu image
     if (!bitch.initialize(graphics,0,0,0, &badbitch))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The Bitch"));
+
+	if (!orb.initialize(graphics,0,0,0, &bborb))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Character"));
+
+	// menu image
+    if (!scythe.initialize(graphics,0,0,0, &proscythe))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The Bitch"));
 
     // initialize DirectX font
     // 18 pixel high Arial
@@ -102,9 +115,17 @@ void Level7::render()
 	pro.setY(200);
 	pro.draw();
 
-	bitch.setX(500);
+	scythe.setX(100);
+	scythe.setY(210);
+	scythe.draw();
+
+	bitch.setX(400);
 	bitch.setY(0);
 	bitch.draw();
+
+	orb.setX(575);
+	orb.setY(25);
+	orb.draw();
 
     dxFont->setFontColor(graphicsNS::ORANGE);
     dxFont->print(message,20,(int)messageY);

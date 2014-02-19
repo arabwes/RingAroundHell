@@ -16,10 +16,13 @@ protected:
 	// GAME ITEMS
     TextureManager	wallpaper;		// BACKGORUND TEXTURE
 	TextureManager	badbitch;		// ENEMY TEXTURE
+	TextureManager	bborb;			// ENEMY WEAPON TEXTURE
 	TextureManager	protagonist;	// CHARACTER TEXTURE	
+	TextureManager	proscythe;			// CHARACTER WEAPON TEXTURE
 
-    Image			wall, bitch, pro;			// MENU IMAGES
-    TextDX			* dxFont;		// DIRECT X FONT
+    Image			wall, bitch, pro;	// MENU IMAGES
+	Image			orb, scythe;		
+    TextDX			* dxFont;			// DIRECT X FONT
     std::string		message;
     float			messageY;
 
