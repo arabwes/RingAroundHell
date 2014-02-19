@@ -1,5 +1,5 @@
-#ifndef SSGAME_H           
-#define SSGAME_H       
+#ifndef PURGATORY_H           
+#define PURGATORY_H       
 #define WIN32_LEAN_AND_MEAN
 
 #include <string>
@@ -9,10 +9,10 @@
 #include "dashboard.h"
 #include "background.h"
 #include "Bum.h"
-#include "SSenemy.h"
+#include "Enemy.h"
 
 
-class SSgame: public Game
+class Purgatory: public Game
 {
 private:
 	TextureManager PlayerTextures,BgTexture,enemyTexture;
@@ -21,9 +21,9 @@ private:
 	Enemy enemy;
 	bool roundOver;
 public:
-	SSgame();
+	Purgatory();
     // Destructor
-    virtual ~SSgame();
+    virtual ~Purgatory();
     // Initialize the game
     void initialize(HWND hwnd);
     void update();      // must override pure virtual from Game

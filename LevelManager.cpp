@@ -1,6 +1,6 @@
 #include "LevelManager.h"
 #include "spacewar.h"
-#include "SSgame.h"
+#include "Purgatory.h"
 #include "MainMenu.h"
 #include "GreedLevel.h"
 #include "Level7.h"
@@ -16,7 +16,7 @@ LevelManager::LevelManager()
 		levels.push_back(LevelFactory(i));
 	}
 	//To demonstrate a level: change number to 2 or 3 depending on if you put both of your lvls in there
-	currentLevel = levels[4];
+	currentLevel = levels[0];
 }
 
 LevelManager::~LevelManager()
@@ -101,7 +101,7 @@ Game* LevelManager::LevelFactory(int lvl)
 		tGame = new MainMenu();
 		break;
 	case 1:
-		tGame = new SSgame();
+		tGame = new Purgatory();
 		break;
 	case 2:
 		tGame = new GreedLevel();

@@ -107,8 +107,8 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
     <ClCompile Include="spacewar.cpp" />
-    <ClCompile Include="SSEnemy.cpp" />
-    <ClCompile Include="SSgame.cpp" />
+    <ClCompile Include="Enemy.cpp" />
+    <ClCompile Include="Purgatory.cpp" />
     <ClCompile Include="SSplayer.cpp" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="input.cpp" />
@@ -142,8 +142,8 @@
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="messageDialog.h" />
     <ClInclude Include="spacewar.h" />
-    <ClInclude Include="SSenemy.h" />
-    <ClInclude Include="SSgame.h" />
+    <ClInclude Include="Enemy.h" />
+    <ClInclude Include="Purgatory.h" />
     <ClInclude Include="textureManager.h" />
     <ClInclude Include="input.h" />
     <ClInclude Include="planet.h" />

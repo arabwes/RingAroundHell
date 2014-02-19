@@ -1,25 +1,25 @@
-#include "SSgame.h"
-SSgame::SSgame()
+#include "Purgatory.h"
+Purgatory::Purgatory()
 {
 	initialized=false;
 
 }
-SSgame:: ~SSgame()
+Purgatory:: ~Purgatory()
 {
 	releaseAll();
 }
 // Initialize the game
-void SSgame::initialize(HWND hwnd)
+void Purgatory::initialize(HWND hwnd)
 {
 	 Game::initialize(hwnd); // throws GameError
 	 // 
 	 if (!BgTexture.initialize(graphics,NEBULA_IMAGE))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializingbackground"));
 	//
-	 if (!PlayerTextures.initialize(graphics,player))
+	 if (!PlayerTextures.initialize(graphics,"ArtAssets\\Jeramiah.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 	 //
-	  if (!enemyTexture.initialize(graphics,player))
+	  if (!enemyTexture.initialize(graphics,"pictures\\ghoul.jpg"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ENEMY"));
 	//
 	if (!background.initialize(this, BgNS::WIDTH, BgNS::HEIGHT, &BgTexture))
@@ -49,7 +49,7 @@ void SSgame::initialize(HWND hwnd)
 	
 	return;
 }
-void SSgame::update()
+void Purgatory::update()
 {
 	if(player1.getActive())
 	{
@@ -83,10 +83,10 @@ void SSgame::update()
 	background.update(frameTime);
 	
 }
-void SSgame::ai()
+void Purgatory::ai()
 {
 }
-void SSgame::collisions()
+void Purgatory::collisions()
 {
 	VECTOR2 Cvector;
 	if(player1.collidesWith(enemy,Cvector))
@@ -95,7 +95,7 @@ void SSgame::collisions()
 		roundOver=true;
 	}
 }
-void SSgame::render()
+void Purgatory::render()
 {
 	graphics->spriteBegin();	
 	background.draw();
@@ -103,10 +103,10 @@ void SSgame::render()
 	player1.draw();
 	 graphics->spriteEnd();
 }
-void SSgame::consoleCommand()
+void Purgatory::consoleCommand()
 {
 }
-void SSgame::roundStart()
+void Purgatory::roundStart()
 {
 		 enemy.setX(GAME_WIDTH-200);
 	 enemy.setY(GAME_HEIGHT/2-BumNS::HEIGHT);
@@ -116,14 +116,14 @@ void SSgame::roundStart()
 	 player1.setVelocity(VECTOR2(0,BumNS::SPEED));
 	 roundOver = false;
 }
-void SSgame::releaseAll()
+void Purgatory::releaseAll()
 {
 	PlayerTextures.onLostDevice();
 	BgTexture.onLostDevice();
 	enemyTexture.onLostDevice();
 	Game::releaseAll();
 }
-void SSgame::resetAll()
+void Purgatory::resetAll()
 {
 	enemyTexture.onLostDevice();
 	PlayerTextures.onResetDevice();
