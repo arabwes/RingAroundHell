@@ -12,9 +12,12 @@ Bum::Bum() :Entity()
 	startFrame= BumNS::BUM_START_FRAME;
 	endFrame=BumNS::BUM_END_FRAME;
 	currentFrame=startFrame;
-	moving=false;
+	dead=false;
+	moveing=false;
+	movingL=false;
+	movingR=false;
+	jump=false;
 }
-
 bool Bum::initialize(Game *gamePtr,int width,int height,int ncols,
 	TextureManager *textureM)
 {
@@ -32,22 +35,34 @@ void Bum::draw()
 
 void Bum::update(float frameTime)
 {
+	if(jump)
+	{
+		velocity.y+=BumNS::JUMP_HEIGHT;
+	}
+	if(!jump)
+	{
+		if(spriteData.y!= 300)
+		{
+			//velocity.y-=BumNS::JUMP_HEIGHT;
+		}
+	}
+	if(moveing&&movingL)
+	{
+		velocity.x -= BumNS::SPEED * frameTime;
+	}
 	
-	if(moving)
+	if(moveing&&movingR)
 	{
-		if(movingL){velocity.x -= BumNS::SPEED * frameTime;}
-		if(movingR){velocity.x += BumNS::SPEED * frameTime;}
+		velocity.x += BumNS::SPEED * frameTime;
 	}
-	else
-	{
-		velocity.x=0;
-	}
-	spriteData.x += frameTime * velocity.x; 
-	//spriteData.y += frameTime * velocity.y;
+	if(movingL){spriteData.x -= frameTime * velocity.x;}
+	if(movingR){spriteData.x += frameTime * velocity.x;}
+	if(jump){spriteData.y-=frameTime*velocity.y;}
+	if(spriteData.y!= 300){spriteData.y-=frameTime*velocity.y;}
 }
 void Bum::setmoving(bool m)
 {
-	moving=m;
+	moveing=m;
 }
 
 void Bum::setDirectL(bool L)
@@ -57,4 +72,12 @@ void Bum::setDirectL(bool L)
 void Bum::setDirectR(bool R)
 {
 	movingR=R;
+}
+void Bum::setPlayerdead(bool d)
+{
+	dead=d;
+}
+void Bum::setjump(bool j)
+{
+	jump=j;
 }

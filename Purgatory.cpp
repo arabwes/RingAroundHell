@@ -19,7 +19,7 @@ void Purgatory::initialize(HWND hwnd)
 	 if (!PlayerTextures.initialize(graphics,"ArtAssets\\Jeramiah.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing player"));
 	 //
-	  if (!enemyTexture.initialize(graphics,"pictures\\ghoul.jpg"))
+	  if (!enemyTexture.initialize(graphics,"pictures\\ghoul.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing ENEMY"));
 	//
 	if (!background.initialize(this, BgNS::WIDTH, BgNS::HEIGHT, &BgTexture))
@@ -53,19 +53,19 @@ void Purgatory::update()
 {
 	if(player1.getActive())
 	{
-		if (input->isKeyDown(SHIP1_LEFT_KEY) || input->getGamepadDPadLeft(0))   // if turn ship1 left
+		if (input->isKeyDown(VK_LEFT) || input->getGamepadDPadLeft(0))   // if turn ship1 left
 		{
 			player1.setmoving(true);
 			player1.setDirectL(true);
 		}
-		else{input->clearKeyPress(SHIP1_LEFT_KEY);player1.setmoving(false);player1.setDirectL(false);}
-		if (input->isKeyDown(SHIP1_RIGHT_KEY) || input->getGamepadDPadRight(0)) // if turn ship1 right
+		//else{input->clearKeyPress(LEFT_KEY_RIGHT);player1.setmoving(false);player1.setDirectL(false);}
+		if (input->isKeyDown(VK_RIGHT) || input->getGamepadDPadRight(0)) // if turn ship1 right
 		{
 			player1.setmoving(true);
 			player1.setDirectR(true);
 		}
-		else{input->clearKeyPress(SHIP1_RIGHT_KEY);player1.setmoving(false);player1.setDirectR(false);}
-		if(input->isKeyDown(SHIP1_FORWARD_KEY))
+		//else{input->clearKeyPress(RIGHT_KEY_RIGHT);player1.setmoving(false);player1.setDirectR(false);}
+		if(input->isKeyDown(VK_UP))
 		{
 			player1.setjump(true);
 		}

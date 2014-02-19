@@ -26,7 +26,7 @@ class Bum : public Entity
 protected:
 	bool jump;
 	bool dead;
-	bool moveing;
+	bool moving;
 	bool movingL;
 	bool movingR;
 	Image bum;

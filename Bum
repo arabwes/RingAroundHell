@@ -13,7 +13,7 @@ Bum::Bum() :Entity()
 	endFrame=BumNS::BUM_END_FRAME;
 	currentFrame=startFrame;
 	dead=false;
-	moveing=false;
+	moving=false;
 	movingL=false;
 	movingR=false;
 	jump=false;
@@ -43,15 +43,15 @@ void Bum::update(float frameTime)
 	{
 		if(spriteData.y!= 300)
 		{
-			velocity.y-=BumNS::JUMP_HEIGHT;
+			//velocity.y-=BumNS::JUMP_HEIGHT;
 		}
 	}
-	if(moveing&&movingL)
+	if(moving&&movingL)
 	{
 		velocity.x -= BumNS::SPEED * frameTime;
 	}
 	
-	if(moveing&&movingR)
+	if(moving&&movingR)
 	{
 		velocity.x += BumNS::SPEED * frameTime;
 	}
@@ -62,7 +62,7 @@ void Bum::update(float frameTime)
 }
 void Bum::setmoving(bool m)
 {
-	moveing=m;
+	moving=m;
 }
 
 void Bum::setDirectL(bool L)

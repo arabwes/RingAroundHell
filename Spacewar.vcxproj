@@ -106,10 +106,11 @@
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="spacewar.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Purgatory.cpp" />
-    <ClCompile Include="SSplayer.cpp" />
+    <ClCompile Include="Bum" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="planet.cpp" />
@@ -141,6 +142,7 @@
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="messageDialog.h" />
+    <ClInclude Include="Player.h" />
     <ClInclude Include="spacewar.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Purgatory.h" />
