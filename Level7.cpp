@@ -24,7 +24,7 @@ void Level7::initialize(HWND hwnd)
 	if (!protagonist.initialize(graphics, "pictures\\Ghoul.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
 
-	if (!badChick.initialize(graphics, "pictures\\badChick.png"))
+	if (!badChick.initialize(graphics, "pictures\\BadChick.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy"));
 
 	if (!bborb.initialize(graphics, "pictures\\Orb.png"))
