@@ -24,7 +24,7 @@ void Level7::initialize(HWND hwnd)
 	if (!protagonist.initialize(graphics, "pictures\\Ghoul.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
 
-	if (!badbitch.initialize(graphics, "pictures\\BadBitch.png"))
+	if (!badChick.initialize(graphics, "pictures\\badChick.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Enemy"));
 
 	if (!bborb.initialize(graphics, "pictures\\Orb.png"))
@@ -42,15 +42,15 @@ void Level7::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Character"));
 
 	// menu image
-    if (!bitch.initialize(graphics,0,0,0, &badbitch))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The Bitch"));
+    if (!chick.initialize(graphics,0,0,0, &badChick))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The chick"));
 
 	if (!orb.initialize(graphics,0,0,0, &bborb))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Character"));
 
 	// menu image
     if (!scythe.initialize(graphics,0,0,0, &proscythe))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The Bitch"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing The chick"));
 
     // initialize DirectX font
     // 18 pixel high Arial
@@ -119,9 +119,9 @@ void Level7::render()
 	scythe.setY(210);
 	scythe.draw();
 
-	bitch.setX(400);
-	bitch.setY(0);
-	bitch.draw();
+	chick.setX(400);
+	chick.setY(0);
+	chick.draw();
 
 	orb.setX(575);
 	orb.setY(25);

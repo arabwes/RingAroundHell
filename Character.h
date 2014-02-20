@@ -13,14 +13,14 @@
 class Character : public Entity
 {
 private:
-	int		Health;
-	int		Attack;
-	int		Magic;
-	int		Special;
-	int		Evasion;
-	double	Guard;
-	double	Resistance;
-	int		Speed;
+	int		health;
+	int		attack;
+	int		magic;
+	int		special;
+	int		evasion;
+	double	guard;
+	double	resistance;
+	int		speed;
 
 public:
 	Character();
