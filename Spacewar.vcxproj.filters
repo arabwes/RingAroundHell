@@ -135,11 +135,11 @@
     <ClCompile Include="Purgatory.cpp">
       <Filter>Source Files\Level 1</Filter>
     </ClCompile>
-    <ClCompile Include="Bum">
-      <Filter>Source Files\Level 1</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files\Level 4 - Greed</Filter>
+    </ClCompile>
+    <ClCompile Include="Bum.cpp">
+      <Filter>Source Files\Level 1</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

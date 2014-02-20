@@ -21,7 +21,7 @@ void Level7::initialize(HWND hwnd)
     if (!wallpaper.initialize(graphics, "pictures\\HorrorWall.jpg"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Background"));
 
-	if (!protagonist.initialize(graphics, "pictures\\Ghoul.jpg"))
+	if (!protagonist.initialize(graphics, "pictures\\Ghoul.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing Player"));
 
 	if (!badbitch.initialize(graphics, "pictures\\BadBitch.png"))

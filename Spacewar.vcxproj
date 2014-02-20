@@ -91,6 +91,7 @@
   <ItemGroup>
     <ClCompile Include="audio.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="Bum.cpp" />
     <ClCompile Include="Button.cpp" />
     <ClCompile Include="Card.cpp" />
     <ClCompile Include="Character.cpp" />
@@ -110,7 +111,6 @@
     <ClCompile Include="spacewar.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Purgatory.cpp" />
-    <ClCompile Include="Bum" />
     <ClCompile Include="textureManager.cpp" />
     <ClCompile Include="input.cpp" />
     <ClCompile Include="planet.cpp" />
