@@ -8,6 +8,7 @@ Bum::Bum() :Entity()
 	spriteData.height=BumNS::HEIGHT;
 	velocity.x=0;
 	velocity.y=0;
+	gravity=BumNS::GRVETY;
 	frameDelay=BumNS::BUM_ANIMATION_DELAY;
 	startFrame= BumNS::BUM_START_FRAME;
 	endFrame=BumNS::BUM_END_FRAME;
@@ -35,31 +36,34 @@ void Bum::draw()
 
 void Bum::update(float frameTime)
 {
-	if(jump)
-	{
-		velocity.y+=BumNS::JUMP_HEIGHT;
-	}
-	if(!jump)
-	{
-		if(spriteData.y!= 300)
-		{
-			//velocity.y-=BumNS::JUMP_HEIGHT;
-		}
-	}
 	if(moving&&movingL)
 	{
 		velocity.x -= BumNS::SPEED * frameTime;
 	}
-	
 	if(moving&&movingR)
 	{
 		velocity.x += BumNS::SPEED * frameTime;
 	}
 	if(movingL){spriteData.x -= frameTime * velocity.x;}
 	if(movingR){spriteData.x += frameTime * velocity.x;}
-	if(jump){spriteData.y-=frameTime*velocity.y;}
-	if(spriteData.y!= 300){spriteData.y-=frameTime*velocity.y;}
-}
+	if(jump==true)
+	{
+			spriteData.y=spriteData.y-velocity.y*frameTime;
+			if(spriteData.y<250)
+			{
+				jump=false;
+			}
+	}
+	if(jump==false&&spriteData.y<350)
+	{
+		spriteData.y=spriteData.y+velocity.y*frameTime;
+	}
+	
+	if (spriteData.x > GAME_WIDTH/2)           
+	    spriteData.x = GAME_WIDTH/2-1;       
+	else if (spriteData.x < GAME_WIDTH-GAME_WIDTH)  
+	    spriteData.x = 0+1;
+	}
 void Bum::setmoving(bool m)
 {
 	moving=m;
@@ -81,3 +85,7 @@ void Bum::setjump(bool j)
 {
 	jump=j;
 }
+	bool Bum::getjump()
+	{
+		return jump;
+	}

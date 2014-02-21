@@ -7,18 +7,19 @@
 
 namespace BumNS
 {
-	const int WIDTH=92;//with of each frame 
-	const int HEIGHT=172;//height of each frame
-	const int X = GAME_WIDTH/2 - WIDTH/2;//screen location
-	const int Y = 300;//screen location
-	const int TEXTURE_COLS=0;//number of columns in the sprit sheet
+	const int WIDTH=100;//with of each frame 
+	const int HEIGHT=100;//height of each frame
+	const int X = 50;//screen location
+	const int Y = 50;//screen location
+	const int TEXTURE_COLS=6;//number of columns in the sprit sheet
 	const int BUM_START_FRAME=0;//ship start frame 
-	const int BUM_END_FRAME=0;//ship end frame
+	const int BUM_END_FRAME=21;//ship end frame
 	//const float ENEMY_SLOW= 15;//enemy slow 
 	const float BUM_ANIMATION_DELAY=0.2f;// time between frames 
 	const float	SPEED = 100;// speed of the player movement 
 	const float MASS = 200.0f;// the mass of the player 
-	const float JUMP_HEIGHT = 15;// the jump hight of the player 
+	const float JUMP_HEIGHT = 10;// the jump hight of the player
+	const float GRVETY=50;
 	enum DIRECTION {NONE, LEFT, RIGHT,JUMPS};//facing derections
 }
 class Bum : public Entity
@@ -44,6 +45,7 @@ public:
 	void setDirectL(bool L);
 	void setDirectR(bool R);
 	void setjump(bool j);
+	bool getjump();
 };
 #endif
 	

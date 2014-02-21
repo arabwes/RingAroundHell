@@ -39,12 +39,12 @@ void Purgatory::initialize(HWND hwnd)
 	 enemy.setCurrentFrame(enemyNS::ENEMY_START_FRAME);
 	 enemy.setColorFilter(SETCOLOR_ARGB(255,255,255,255));
 	//
-	 enemy.setX(GAME_WIDTH-200);
-	 enemy.setY(300);
+	 enemy.setX(500);
+	 enemy.setY(350);
 	 enemy.setVelocity(VECTOR2(0,enemyNS::SPEED1));
-	 player1.setX(255);
-	 player1.setY(300);
-	 player1.setVelocity(VECTOR2(0,BumNS::SPEED));
+	 player1.setX(50);
+	 player1.setY(350);
+	 player1.setVelocity(VECTOR2(BumNS::JUMP_HEIGHT,BumNS::SPEED));
 	 //
 	
 	return;
@@ -53,24 +53,26 @@ void Purgatory::update()
 {
 	if(player1.getActive())
 	{
-		if (input->isKeyDown(VK_LEFT) || input->getGamepadDPadLeft(0))   // if turn ship1 left
+		if (input->isKeyDown(VK_LEFT) || input->getGamepadDPadLeft(0)) //MOVE LEFT
 		{
 			player1.setmoving(true);
 			player1.setDirectL(true);
 		}
-		//else{input->clearKeyPress(LEFT_KEY_RIGHT);player1.setmoving(false);player1.setDirectL(false);}
-		if (input->isKeyDown(VK_RIGHT) || input->getGamepadDPadRight(0)) // if turn ship1 right
+		else{input->clearKeyPress(VK_LEFT);player1.setmoving(false);player1.setDirectL(false);}
+		if (input->isKeyDown(VK_RIGHT) || input->getGamepadDPadRight(0))//MOVE RIGHT
 		{
 			player1.setmoving(true);
 			player1.setDirectR(true);
 		}
-		//else{input->clearKeyPress(RIGHT_KEY_RIGHT);player1.setmoving(false);player1.setDirectR(false);}
+		else{input->clearKeyPress(VK_RIGHT);player1.setmoving(false);player1.setDirectR(false);}
 		if(input->isKeyDown(VK_UP))
 		{
 			player1.setjump(true);
 		}
-		else
-		{player1.setjump(false);}
+		if(player1.getjump())
+		{
+			input->keyUp(VK_UP);
+		}
 	}
 	if(roundOver)
 	{
@@ -108,11 +110,11 @@ void Purgatory::consoleCommand()
 }
 void Purgatory::roundStart()
 {
-		 enemy.setX(GAME_WIDTH-200);
-	 enemy.setY(GAME_HEIGHT/2-BumNS::HEIGHT);
+		 enemy.setX(500);
+	 enemy.setY(350);
 	 enemy.setVelocity(VECTOR2(0,enemyNS::SPEED1));
-	 player1.setX(255);
-	 player1.setY(GAME_HEIGHT/2-BumNS::HEIGHT);
+	 player1.setX(50);
+	 player1.setY(350);
 	 player1.setVelocity(VECTOR2(0,BumNS::SPEED));
 	 roundOver = false;
 }
