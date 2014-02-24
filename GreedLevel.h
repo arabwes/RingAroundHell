@@ -9,19 +9,21 @@
 #include "image.h"
 #include "textDX.h"
 #include "constants.h"
-#include"Card.h"
+#include "Deck.h"
+#include "Player.h"
+#include "Button.h"
 #include<vector>
-
-void CombineString(string &TempString,string Letter1, string Letter2, int Number);
 
 class GreedLevel : public Game
 {
 	private:
     // game items
-    TextureManager menuTexture, cardTextures; // textures
+    TextureManager menuTexture, cardTextures, deckTexture, btnHitTexture, btnDoneTexture; // textures
     Image   menu;               // menu image
     TextDX  *dxFont;            // DirectX font
-	std::vector<Card*> deck;
+	Deck *deck;
+	Player *player, *dealer;
+	Button *btnHitMe, *btnDone;
 	int clickedLvl;
 	Card* CardFactory(int);
 

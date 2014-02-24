@@ -15,7 +15,7 @@ Player::~Player()
 Player::Player(string tName, int Y)
 {
 	name = tName;
-	dropped51 = false;
+	//dropped51 = false;
 	turn = false;
 	handY = Y;
 	
@@ -36,7 +36,7 @@ void Player::UpdateHand()
 	{
 		i++;
 		int NewX;
-		NewX = 600/hand.size() * i;
+		NewX = 300/hand.size() * i;
 		(*handIt)->Reposition(NewX+150, handY);
 		(*handIt)->UpdateFace(turn);
 	}
@@ -44,9 +44,8 @@ void Player::UpdateHand()
 
 void Player::ShowHand()
 {
-	
 	for(handIt = hand.begin(); handIt < hand.end(); handIt++)
 	{
-		
+		(*handIt)->draw();
 	}
 }

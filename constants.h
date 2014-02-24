@@ -10,6 +10,8 @@
 #include <windows.h>
 #include <string>
 #include <sstream>
+#include <random>
+#include <ctime>
 using namespace std;
 
 //void CombineString(string &TempString,string Letter1, string Letter2, int Number);
