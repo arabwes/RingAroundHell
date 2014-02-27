@@ -20,7 +20,8 @@ private:
 	string fileName;			// Filename of Card image
 	string facedownFileName;	// Filename of back of card
 	bool isFaceDown;				// Flag for the direction the card is facing
-	TextureManager texMan;
+	TextureManager *texManFront, *texManBack;
+	int newX, newY;				//New position to create movement animation from old position
 
 public:
 	string GetSuit();		// Returns Suit of card
@@ -29,8 +30,9 @@ public:
 	string GetFullName();	// Returns FullName of card
 	bool Selected;			// Flag to recognize if a card has been selected or not
 	int GetValue();			// Returns Value of card
-	string UpdateFace(bool ShowFace);
+	void UpdateFace(bool ShowFace);
 	void Initialize(Graphics *graphics, Game * game);
+	void CardUpdate();
 	void Reposition(int x, int y);
 	Card();
 	Card(string TempFName, string TempName, string TempSuit, int TempVal, int TempNum, string File, string facedown);  //Creates Card

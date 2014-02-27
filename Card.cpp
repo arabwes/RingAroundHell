@@ -16,6 +16,9 @@ Card::Card(string TempFName, string TempName, string TempSuit, int TempVal, int 
 	spriteData.width = 71;
 	spriteData.height = 96;
 
+	texManFront = new TextureManager();
+	texManBack = new TextureManager();
+
 	frameDelay = 0;
 	startFrame = 0;
 	endFrame = 0;
@@ -30,20 +33,25 @@ Card::~Card()
 
 void Card::Initialize(Graphics *graphics, Game* game)
 {
-	if (!texMan.initialize(graphics,fileName))
+	if (!texManFront->initialize(graphics,fileName))
+				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card textures"));
+	if (!texManBack->initialize(graphics,facedownFileName))
 				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card textures"));
 
-	if(!this->initialize(game, 71, 96, 1, &texMan))
+	if(!this->initialize(game, 71, 96, 1, texManFront))
 	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card texture"));
+
+
 }
 
-string Card::UpdateFace(bool ShowFace)
+void Card::UpdateFace(bool showFace)
 {
-	if(ShowFace)
-		return fileName;
+	if(showFace)
+		//!showFace;
+		this->setTextureManager(texManFront);
 		//Texture = LoadTexture(FileName, TransColor);
 	else
-		return facedownFileName;
+		this->setTextureManager(texManBack);
 		//Texture = LoadTexture(FacedownFileName, TransColor);
 }
 int Card::GetValue()
@@ -70,6 +78,26 @@ int Card::GetNum()
 }
 void Card::Reposition(int X, int Y)
 {
-	spriteData.x = X;
-	spriteData.y = Y;
+	newX = X;
+	newY = Y;
+}
+void Card::CardUpdate()
+{
+	if(spriteData.x < newX)
+	{
+		spriteData.x++;
+	}
+	else if(spriteData.x > newX)
+	{
+		spriteData.x--;
+	}
+
+	if(spriteData.y < newY)
+	{
+		spriteData.y++;
+	}
+	else if(spriteData.y > newY)
+	{
+		spriteData.y--;
+	}
 }

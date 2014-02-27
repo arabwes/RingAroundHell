@@ -20,7 +20,7 @@ class GreedLevel : public Game
     // game items
     TextureManager menuTexture, cardTextures, deckTexture, btnHitTexture, btnDoneTexture; // textures
     Image   menu;               // menu image
-    TextDX  *dxFont;            // DirectX font
+    TextDX  *playerPoints;            // DirectX font
 	Deck *deck;
 	Player *player, *dealer;
 	Button *btnHitMe, *btnDone;

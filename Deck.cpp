@@ -117,12 +117,12 @@ Deck::Deck(Game* level) : Entity()
 				CombineString(tFile,"ArtAssets\\s", ".png", i%13);
 			
 			if(l == 1)
-				tBack = "ArtAssets\\backblue1.png";
+				tBack = "ArtAssets\\b1fv.png";		//blue back of card
 			else if(l == 2)
-				tBack = "ArtAssets\\backred1.png";
+				tBack = "ArtAssets\\b2fv.png";		//red back of card
 
 			Card *tempCard = new Card(tFName, tName, tSuit, tVal, tNum, tFile, tBack);	//Create the Card
-			
+			tempCard->Reposition(spriteData.x, spriteData.y);
 			//tempCard->Initialize(graphics, game);	//Set textures onto cards
 			cardList.push_back(tempCard);	//Push card into Deck		
 		}
@@ -131,23 +131,23 @@ Deck::Deck(Game* level) : Entity()
 
 void Deck::Initialize(Graphics* graphics)
 {
-	ShuffleCards();
-	
+	if (!texManFront.initialize(graphics, "ArtAssets\\deckView2.png"))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card textures"));
+	if(!this->initialize(game, 81, 106, 1, &texManFront))
+		throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card texture"));
+	this->setX(GAME_WIDTH/2 - spriteData.width/2);
+	this->setY(GAME_HEIGHT/2 - spriteData.height/2);
+	deckInitialized = true;
+
+	ShuffleCards();	
 	std::vector<Card*>::iterator deckIt;
 	for(deckIt = cardList.begin(); deckIt < cardList.end(); deckIt++)
 	{
 		(*deckIt)->Initialize(graphics, game);
+		(*deckIt)->setX(this->getX());
+		(*deckIt)->setY(this->getY());
 		deck.push((*deckIt));
 	}
-	
-	if (!texMan.initialize(graphics, "ArtAssets\\deckView2.png"))
-				throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card textures"));
-
-	if(!this->initialize(game, 81, 106, 1, &texMan))
-	throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing card texture"));
-	this->setX(GAME_WIDTH/2 - spriteData.width/2);
-	this->setY(GAME_HEIGHT/2 - spriteData.height/2);
-	deckInitialized = true;
 }
 
 Card* Deck::DrawCard()

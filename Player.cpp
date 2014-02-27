@@ -32,20 +32,28 @@ void Player::DrawCard(Card *tCard)
 void Player::UpdateHand()
 {
 	int i = 0;
+	currentPoints = 0;
 	for(handIt = hand.begin(); handIt < hand.end(); handIt++)
 	{
 		i++;
 		int NewX;
 		NewX = 300/hand.size() * i;
 		(*handIt)->Reposition(NewX+150, handY);
-		(*handIt)->UpdateFace(turn);
+		(*handIt)->CardUpdate();
+		currentPoints += (*handIt)->GetValue();
 	}
 }
 
 void Player::ShowHand()
-{
+{	
 	for(handIt = hand.begin(); handIt < hand.end(); handIt++)
 	{
+		(*handIt)->UpdateFace(false);
 		(*handIt)->draw();
 	}
+}
+
+int Player::GetHandPoints()
+{
+	return currentPoints;
 }

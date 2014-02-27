@@ -16,7 +16,7 @@ class Deck : public Entity
 {
 	std::vector<Card*> cardList;
 	std::stack<Card*> deck;
-	TextureManager texMan;
+	TextureManager texManFront;
 	Game* game;
 	bool deckInitialized;
 
