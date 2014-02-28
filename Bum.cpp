@@ -18,6 +18,7 @@ Bum::Bum() :Entity()
 	movingL=false;
 	movingR=false;
 	jump=false;
+	onGround=true;
 }
 bool Bum::initialize(Game *gamePtr,int width,int height,int ncols,
 	TextureManager *textureM)
@@ -46,17 +47,22 @@ void Bum::update(float frameTime)
 	}
 	if(movingL){spriteData.x -= frameTime * velocity.x;}
 	if(movingR){spriteData.x += frameTime * velocity.x;}
-	if(jump==true)
+	if(jump==true&&onGround==true)
 	{
 			spriteData.y=spriteData.y-velocity.y*frameTime;
-			if(spriteData.y<250)
+			if(spriteData.y<225)
 			{
 				jump=false;
 			}
 	}
 	if(jump==false&&spriteData.y<350)
 	{
-		spriteData.y=spriteData.y+velocity.y*frameTime;
+		spriteData.y=spriteData.y+velocity.y*frameTime;onGround=false;
+	
+	}	
+	if(spriteData.y>350)
+	{
+		onGround=true;
 	}
 	
 	if (spriteData.x > GAME_WIDTH/2)           
@@ -89,3 +95,11 @@ void Bum::setjump(bool j)
 	{
 		return jump;
 	}
+void Bum::setonground(bool b)
+{	
+	onGround=b;
+}
+bool Bum::getonground()
+{
+	return onGround;
+}

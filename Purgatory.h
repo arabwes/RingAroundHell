@@ -12,14 +12,21 @@
 #include "Enemy.h"
 
 
+
 class Purgatory: public Game
 {
 private:
 	TextureManager PlayerTextures,BgTexture,enemyTexture;
 	Bum player1;
-	bg background;
-	Enemy enemy;
+	bg background[2];
+	Enemy enemy[4];
+	TextDX scoreFont;
+	int playerScore;
 	bool roundOver;
+	COLOR_ARGB bCOLOR;
+	entityNS::COLLISION_TYPE box;
+	RECT PLAYER,ENEMY,FORPOINT;
+	char buffer[20];
 public:
 	Purgatory();
     // Destructor

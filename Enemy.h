@@ -17,22 +17,24 @@ namespace enemyNS
 	const float MASS1=150;
 	const float MASS2=100;
 	const float MASS3=50;
-	const float SPEED1 =15;
-	const float SPEED2 =15;
-	enum DIRECTION { NONE,LEFT,RIGHT};
+	const float SPEED1 =40;
+	const float SPEED2 =30;
+	const float SPEED3 =50;
+	const float SPEED4 =20;
 }
 
 class Enemy : public Entity
 {
 protected:	
-	enemyNS::DIRECTION derection;
 	Image enemy;
 	bool move;
+	int eID;
 public:
 	Enemy();
 	virtual void draw();
 	virtual bool initialize(Game *gamePtr, int width, int height, int ncols,TextureManager *textureM);
 	void update(float frameTime);
 	void setmoving(bool m);
+	void seteID(int e);
 };
 #endif

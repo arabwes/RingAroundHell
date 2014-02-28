@@ -18,7 +18,7 @@ namespace BumNS
 	const float BUM_ANIMATION_DELAY=0.2f;// time between frames 
 	const float	SPEED = 100;// speed of the player movement 
 	const float MASS = 200.0f;// the mass of the player 
-	const float JUMP_HEIGHT = 10;// the jump hight of the player
+	const float JUMP_HEIGHT =200;// the jump hight of the player
 	const float GRVETY=50;
 	enum DIRECTION {NONE, LEFT, RIGHT,JUMPS};//facing derections
 }
@@ -30,6 +30,7 @@ protected:
 	bool moving;
 	bool movingL;
 	bool movingR;
+	bool onGround;
 	Image bum;
 public:
 	Bum();
@@ -46,6 +47,8 @@ public:
 	void setDirectR(bool R);
 	void setjump(bool j);
 	bool getjump();
+	void setonground(bool b);
+	bool getonground();
 };
 #endif
 	

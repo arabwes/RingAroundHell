@@ -30,10 +30,23 @@ void Enemy::draw()
 
 void Enemy::update(float frameTime)
 {
-	if(move)
+	if(move&&eID==1)
 	{
-		velocity.x -= enemyNS::SPEED2 * frameTime;
+		velocity.x -= enemyNS::SPEED1* frameTime;
 	}
+	else if(move&&eID==2)
+	{
+		velocity.x -= enemyNS::SPEED2* frameTime;
+	}
+	else if(move&&eID==3)
+	{
+		velocity.x -= enemyNS::SPEED3* frameTime;
+	}
+	else if(move&&eID==4)
+	{
+		velocity.x -= enemyNS::SPEED4* frameTime;
+	}
+
 	spriteData.x += frameTime * velocity.x;
 	if (spriteData.x > GAME_WIDTH)           
 	    spriteData.x = -enemyNS::WIDTH;       
@@ -43,4 +56,8 @@ void Enemy::update(float frameTime)
 void Enemy::setmoving(bool m)
 {
 	move=m;
+}
+void Enemy::seteID(int e)
+{
+	eID=e;
 }

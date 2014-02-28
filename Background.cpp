@@ -1,6 +1,9 @@
 #include "background.h"
 	bg::bg()
 	{
+	move=false;
+	spriteData.x=BgNS::X;
+	spriteData.y=BgNS::Y;
 	}
 	void bg::draw()
 	{
@@ -13,13 +16,20 @@
 	}
 	void bg::update(float frameTime)
 	{
-		switch(direction)
-		{
-		case BgNS::LEFT:
-
-			break;
-		case BgNS::RIGHT:
-			break;
-		}
-
+		if(move==true)
+	{
+		velocity.x -= BgNS::SPEED * frameTime;
 	}
+		else 
+			velocity.x=0;
+	spriteData.x += frameTime * velocity.x;
+	if (spriteData.x > GAME_WIDTH)           
+	    spriteData.x = -BgNS::WIDTH;       
+	else if (spriteData.x < -BgNS::WIDTH)  
+	    spriteData.x = GAME_WIDTH;    
+	}
+
+void bg::setmoving(bool m)
+{
+	move=m;
+}
