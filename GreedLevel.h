@@ -20,13 +20,13 @@ class GreedLevel : public Game
     // game items
     TextureManager menuTexture, cardTextures, deckTexture, btnHitTexture, btnDoneTexture; // textures
     Image   menu;               // menu image
-    TextDX  *playerPoints;            // DirectX font
+    TextDX  *playerPoints, *dealerPoints;            // DirectX font
 	Deck *deck;
 	Player *player, *dealer;
 	Button *btnHitMe, *btnDone;
 	int clickedLvl;
 	Card* CardFactory(int);
-
+	bool roundStart;
 
 public:
     // Constructor
@@ -42,7 +42,7 @@ public:
     void releaseAll();
     void resetAll();
 
-	void CreateDeck();
+	void beginRound();
 };
 
 #endif

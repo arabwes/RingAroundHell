@@ -48,7 +48,7 @@ void Player::ShowHand()
 {	
 	for(handIt = hand.begin(); handIt < hand.end(); handIt++)
 	{
-		(*handIt)->UpdateFace(false);
+		(*handIt)->UpdateFace(turn);
 		(*handIt)->draw();
 	}
 }

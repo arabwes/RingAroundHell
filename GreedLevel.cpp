@@ -13,6 +13,7 @@ GreedLevel::GreedLevel()
 	player = new Player("Player", (int) GAME_HEIGHT*(0.8));
 	dealer = new Player("Dealer", 0);
 	playerPoints = new TextDX();
+	dealerPoints = new TextDX();
 }
 
 //=============================================================================
@@ -27,6 +28,7 @@ GreedLevel::~GreedLevel()
 	btnHitTexture.onLostDevice();
 	btnDoneTexture.onLostDevice();
     safeDelete(playerPoints);
+	safeDelete(dealerPoints);
 }
 
 //=============================================================================
@@ -37,10 +39,13 @@ void GreedLevel::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 	srand(time(NULL));
+	roundStart = false;
 	player->turn = true;
 	//Points
 	playerPoints->initialize(graphics, 48, false, false, "Arial");
 	playerPoints->setFontColor(graphicsNS::YELLOW);
+	dealerPoints->initialize(graphics, 48, false, false, "Arial");
+	dealerPoints->setFontColor(graphicsNS::BLUE);
 
     // menu texture
     if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
@@ -73,6 +78,17 @@ void GreedLevel::initialize(HWND hwnd)
 //=============================================================================
 void GreedLevel::update()
 {
+	if(!roundStart)
+	{
+		beginRound();
+	}
+
+	/*if(btnDone->Update())
+	{
+		dealer->turn = !dealer->turn;
+		player->turn = !player->turn;
+	}*/
+
 	if(player->turn)
 	{
 		if(btnHitMe->Update())
@@ -85,11 +101,8 @@ void GreedLevel::update()
 			dealer->turn = true;
 		}
 	}
-	else if(dealer->turn)
-	{
-		ai();
-	}
 
+	dealer->UpdateHand();
 	player->UpdateHand();
 }
 
@@ -99,9 +112,15 @@ void GreedLevel::update()
 void GreedLevel::ai()
 {
 	//do stuff then change turn to false
-
-	dealer->turn = false;
-	player->turn = true;
+	if(dealer->turn)
+	{
+		if(player->GetHandPoints() <= 21 && player->GetHandPoints() > dealer->GetHandPoints())
+		{
+			dealer->DrawCard(deck->DrawCard());
+		}
+	}
+	/*dealer->turn = false;
+	player->turn = true;*/
 }
 
 //=============================================================================
@@ -122,9 +141,11 @@ void GreedLevel::render()
 	btnDone->draw();
 	deck->draw();
 	
-	player->ShowHand();
-	dealer->ShowHand();
-	playerPoints->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.7);
+	dealer->ShowHand();		//Draw dealer's hand
+	player->ShowHand();		//Draw player's hand
+
+	playerPoints->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.65);
+	playerPoints->print(to_string((long double)dealer->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.25);
     graphics->spriteEnd();                  // end drawing sprites
 }
 
@@ -151,3 +172,12 @@ void GreedLevel::resetAll()
     return;
 }
 
+void GreedLevel::beginRound()
+{
+	for(int i = 0; i < 2; i++)
+	{
+		dealer->DrawCard(deck->DrawCard());
+		player->DrawCard(deck->DrawCard());
+	}
+	roundStart = true;
+}
