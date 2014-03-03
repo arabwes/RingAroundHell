@@ -27,6 +27,7 @@ class GreedLevel : public Game
 	int clickedLvl;
 	Card* CardFactory(int);
 	bool roundStart;
+	float timer;
 
 public:
     // Constructor

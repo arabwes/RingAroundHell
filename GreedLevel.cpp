@@ -14,6 +14,7 @@ GreedLevel::GreedLevel()
 	dealer = new Player("Dealer", 0);
 	playerPoints = new TextDX();
 	dealerPoints = new TextDX();
+	timer = 0;
 }
 
 //=============================================================================
@@ -174,10 +175,22 @@ void GreedLevel::resetAll()
 
 void GreedLevel::beginRound()
 {
-	for(int i = 0; i < 2; i++)
+	
+	while(dealer->GetHandCount() < 2)
 	{
-		dealer->DrawCard(deck->DrawCard());
-		player->DrawCard(deck->DrawCard());
+		//if(GetTickCount() > timer + 10000)
+		{
+			dealer->DrawCard(deck->DrawCard());
+			timer = GetTickCount();
+		}
+	}
+	while(player->GetHandCount() < 2)
+	{
+		//if(GetTickCount() > timer + 1000)
+		{
+			player->DrawCard(deck->DrawCard());
+			timer = GetTickCount();
+		}
 	}
 	roundStart = true;
 }

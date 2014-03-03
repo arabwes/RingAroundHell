@@ -21,6 +21,7 @@ private:
 public:
 	int handY;	//Y coordinate of hand 
 	int GetHandPoints();		//Returns cumutalitive total of all card's value in hand
+	int GetHandCount();			//Returns amount of cards in hand
 	bool turn;	//Flag to tell if player can play or not
 	void DrawCard(Card *tCard);		//Adds Card to Hand
 	void ShowHand();			//Reveals/conceals own hand to player

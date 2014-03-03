@@ -45,10 +45,15 @@ void LevelManager::Initialize(HWND hwnd)
 
 void LevelManager::GoToLevel(int lvlNumber)
 {
-	currentLvlNum = lvlNumber;
-	//currentLevel->deleteAll();
-	currentLevel = levels[lvlNumber];
-	currentLevel->initialize(hwnd);
+	//Any level (that isn't the main menu) would have their memory deleted upon exit and reset
+	if(currentLvlNum != 0)
+	{
+		currentLevel->deleteAll();
+		levels[currentLvlNum] = LevelFactory(currentLvlNum);
+	}
+	currentLvlNum = lvlNumber;			//Track current level number
+	currentLevel = levels[lvlNumber];	//Point to the new level
+	currentLevel->initialize(hwnd);		//Initialize new level
 }
 
 int LevelManager::getCurrentLevel()

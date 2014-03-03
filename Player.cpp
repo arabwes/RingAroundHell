@@ -38,7 +38,7 @@ void Player::UpdateHand()
 		i++;
 		int NewX;
 		NewX = 300/hand.size() * i;
-		(*handIt)->Reposition(NewX+150, handY);
+		(*handIt)->Reposition(NewX + GAME_WIDTH/4, handY);
 		(*handIt)->CardUpdate();
 		currentPoints += (*handIt)->GetValue();
 	}
@@ -56,4 +56,9 @@ void Player::ShowHand()
 int Player::GetHandPoints()
 {
 	return currentPoints;
+}
+
+int Player::GetHandCount()
+{
+	return hand.size();
 }
