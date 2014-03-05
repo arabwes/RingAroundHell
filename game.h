@@ -127,6 +127,8 @@ public:
     // Call graphics->spriteEnd();
     //   draw non-sprites
     virtual void render() = 0;
+
+	void Wait(int seconds);
 };
 
 #endif

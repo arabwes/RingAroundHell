@@ -81,14 +81,8 @@ void GreedLevel::update()
 {
 	if(!roundStart)
 	{
-		beginRound();
+		
 	}
-
-	/*if(btnDone->Update())
-	{
-		dealer->turn = !dealer->turn;
-		player->turn = !player->turn;
-	}*/
 
 	if(player->turn)
 	{
@@ -176,21 +170,18 @@ void GreedLevel::resetAll()
 void GreedLevel::beginRound()
 {
 	
-	while(dealer->GetHandCount() < 2)
+	if(dealer->GetHandCount() < 2)
 	{
-		//if(GetTickCount() > timer + 10000)
-		{
-			dealer->DrawCard(deck->DrawCard());
-			timer = GetTickCount();
-		}
+		dealer->DrawCard(deck->DrawCard());
+		Wait(1);		
 	}
-	while(player->GetHandCount() < 2)
+
+	else if(player->GetHandCount() < 2)
 	{
-		//if(GetTickCount() > timer + 1000)
-		{
-			player->DrawCard(deck->DrawCard());
-			timer = GetTickCount();
-		}
+		player->DrawCard(deck->DrawCard());
+		Wait(1);		
 	}
-	roundStart = true;
+	
+	if(dealer->GetHandCount() == 2 && player->GetHandCount() == 2)
+		roundStart = true;
 }

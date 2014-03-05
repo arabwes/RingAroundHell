@@ -37,6 +37,7 @@ void Bum::draw()
 
 void Bum::update(float frameTime)
 {
+	 Entity::update(frameTime);
 	if(moving&&movingL)
 	{
 		velocity.x -= BumNS::SPEED * frameTime;

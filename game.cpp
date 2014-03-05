@@ -380,3 +380,12 @@ void Game::deleteAll()
     safeDelete(inputDialog);
     initialized = false;
 }
+
+void Game::Wait(int seconds)
+{
+	DWORD startTime = GetTickCount();
+	while(GetTickCount() < (startTime + seconds*1000))
+	{
+
+	}
+}

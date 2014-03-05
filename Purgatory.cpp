@@ -42,8 +42,8 @@ void Purgatory::initialize(HWND hwnd)
 	//
 	  for(int j=0;j<2;j++)
 	  {
-	if (!background[j].initialize(this, BgNS::WIDTH, BgNS::HEIGHT, &BgTexture))
-      throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing bg"));
+		if (!background[j].initialize(this, BgNS::WIDTH, BgNS::HEIGHT, &BgTexture))
+		  throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing bg"));
 	  }
 	//
 	 if (!player1.initialize(this, BumNS::WIDTH, BumNS::HEIGHT, BumNS::TEXTURE_COLS, &PlayerTextures))
@@ -84,6 +84,7 @@ void Purgatory::initialize(HWND hwnd)
 	background[1].setY(0);
 	return;
 }
+
 void Purgatory::update()
 {
 	if(player1.getActive())
@@ -95,6 +96,7 @@ void Purgatory::update()
 			player1.setDirectL(true);
 		}
 		else{input->clearKeyPress(VK_LEFT);player1.setmoving(false);player1.setDirectL(false);}
+		
 		if (input->isKeyDown(VK_RIGHT) || input->getGamepadDPadRight(0))//MOVE RIGHT
 		{
 			background[0].setmoving(true);
@@ -102,7 +104,15 @@ void Purgatory::update()
 			player1.setmoving(true);
 			player1.setDirectR(true);
 		}
-		else{input->clearKeyPress(VK_RIGHT);player1.setmoving(false);player1.setDirectR(false);background[0].setmoving(false);background[1].setmoving(false);}
+		else
+		{
+			input->clearKeyPress(VK_RIGHT);
+			player1.setmoving(false);
+			player1.setDirectR(false);
+			background[0].setmoving(false);
+			background[1].setmoving(false);
+		}
+
 		if(input->isKeyDown(VK_UP))
 		{
 			if(player1.getonground())
@@ -117,12 +127,15 @@ void Purgatory::update()
 	}
 	for(int i=0;i<3;i++)
 	{
-	if(enemy[i].getActive()){enemy[i].setmoving(true);}
-	if(enemy[i].getX()<=0)
-	{
-		playerScore+=1;
-	}
-	enemy[i].update(frameTime);
+		if(enemy[i].getActive())
+		{
+			enemy[i].setmoving(true);
+		}
+		if(enemy[i].getX()<=0)
+		{
+			playerScore+=1;
+		}
+		enemy[i].update(frameTime);
 	}
 	player1.update(frameTime);
 	for(int j=0;j<2;j++)
@@ -130,9 +143,11 @@ void Purgatory::update()
 	background[j].update(frameTime);
 	}
 }
+
 void Purgatory::ai()
 {
 }
+
 void Purgatory::collisions()
 {
 	VECTOR2 Cvector;
@@ -145,6 +160,7 @@ void Purgatory::collisions()
 	}
 	}
 }
+
 void Purgatory::render()
 {
 	graphics->spriteBegin();	
