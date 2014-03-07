@@ -25,6 +25,7 @@ Player::Player(string tName, int Y)
 void Player::DrawCard(Card *tCard)
 {
 	hand.push_back(tCard);	//Push the card into the hand vector
+
 	UpdateHand();
 }
 
@@ -61,4 +62,21 @@ int Player::GetHandPoints()
 int Player::GetHandCount()
 {
 	return hand.size();
+}
+
+void Player::MakeBet(int amount)
+{
+	bet = bet;
+}
+
+void Player::UpdateBet(bool result)
+{
+	if(result)
+	{
+		coins += bet;
+	}
+	else
+	{
+		coins -= bet;
+	}
 }

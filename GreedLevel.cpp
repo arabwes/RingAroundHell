@@ -10,6 +10,8 @@ GreedLevel::GreedLevel()
     deck = new Deck(this);
 	btnHitMe = new Button(NULL);
 	btnDone = new Button(NULL);
+	btnBetPlus = new Button(NULL);
+	btnBetMinus = new Button(NULL);
 	player = new Player("Player", (int) GAME_HEIGHT*(0.8));
 	dealer = new Player("Dealer", 0);
 	playerPoints = new TextDX();
@@ -28,6 +30,9 @@ GreedLevel::~GreedLevel()
 	deckTexture.onLostDevice();
 	btnHitTexture.onLostDevice();
 	btnDoneTexture.onLostDevice();
+	btnMinusTexture.onLostDevice();
+	btnPlusTexture.onLostDevice();
+
     safeDelete(playerPoints);
 	safeDelete(dealerPoints);
 }
@@ -41,6 +46,7 @@ void GreedLevel::initialize(HWND hwnd)
     Game::initialize(hwnd); // throws GameError
 	srand(time(NULL));
 	roundStart = false;
+	madeBets = false;
 	player->turn = true;
 	//Points
 	playerPoints->initialize(graphics, 48, false, false, "Arial");
@@ -53,24 +59,36 @@ void GreedLevel::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
     // Draw button texture
     if (!btnHitTexture.initialize(graphics,"ArtAssets//HitMe.png"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
 	// End turn button texture
     if (!btnDoneTexture.initialize(graphics,"ArtAssets//Done.png"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
+	// End turn button texture
+    if (!btnPlusTexture.initialize(graphics,"ArtAssets//Done.png"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing plus button texture"));
+	// End turn button texture
+    if (!btnMinusTexture.initialize(graphics,"ArtAssets//Done.png"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing minus button texture"));
+	
 	// images
     if (!menu.initialize(graphics,0,0,0,&menuTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
 	if (!btnHitMe->initialize(this, 100, 50, 1, &btnHitTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing hit button"));
 	if (!btnDone->initialize(this, 100, 50, 1, &btnDoneTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing done button"));
+	if (!btnBetPlus->initialize(this, 25, 25, 1, &btnPlusTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+	if (!btnBetMinus->initialize(this, 100, 50, 1, &btnMinusTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+	
 
 	btnHitMe->setX(GAME_WIDTH*(0.05));
 	btnDone->setX(GAME_WIDTH*(0.05));
 	btnHitMe->setY(GAME_HEIGHT*(0.4));
 	btnDone->setY(GAME_HEIGHT*(0.4) + btnDone->getHeight()*(1.1));
-
+	
+	
 	deck->Initialize(graphics);
 }
 
@@ -79,21 +97,39 @@ void GreedLevel::initialize(HWND hwnd)
 //=============================================================================
 void GreedLevel::update()
 {
-	if(!roundStart)
-	{
-		
-	}
-
-	if(player->turn)
-	{
-		if(btnHitMe->Update())
+	if(madeBets)
+	{	
+		if(!roundStart)
 		{
-			player->DrawCard(deck->DrawCard());
+			beginRound();
 		}
-		else if(btnDone->Update())
+
+		if(player->turn)
 		{
-			player->turn = false;
-			dealer->turn = true;
+			if(btnHitMe->Update())
+			{
+				player->DrawCard(deck->DrawCard());
+			}
+			else if(btnDone->Update())
+			{
+				player->turn = false;
+				dealer->turn = true;
+			}
+		}
+	}
+	else
+	{
+		if(btnBetPlus->Update())
+		{
+			betCount++;
+		}
+		if(btnBetMinus->Update())
+		{
+			betCount--;
+		}
+		if(btnDone->Update())
+		{
+			madeBets = true;
 		}
 	}
 
@@ -170,18 +206,15 @@ void GreedLevel::resetAll()
 void GreedLevel::beginRound()
 {
 	
-	if(dealer->GetHandCount() < 2)
+	while(dealer->GetHandCount() < 2)
 	{
-		dealer->DrawCard(deck->DrawCard());
-		Wait(1);		
+		dealer->DrawCard(deck->DrawCard());		
 	}
 
-	else if(player->GetHandCount() < 2)
+	while(player->GetHandCount() < 2)
 	{
-		player->DrawCard(deck->DrawCard());
-		Wait(1);		
+		player->DrawCard(deck->DrawCard());				
 	}
 	
-	if(dealer->GetHandCount() == 2 && player->GetHandCount() == 2)
 		roundStart = true;
 }

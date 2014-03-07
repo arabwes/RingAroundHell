@@ -14,9 +14,9 @@ private:
 	vector<Card*> hand;		//The Player's Hand
 	vector<Card*>::iterator handIt;	//Iterator for hand
 	int currentPoints;
-	int coins;
+	int coins, bet;
 	bool dropped51;			//Flag to recognize if player has dropped a value of 51
-
+	
 
 public:
 	int handY;	//Y coordinate of hand 
@@ -26,6 +26,8 @@ public:
 	void DrawCard(Card *tCard);		//Adds Card to Hand
 	void ShowHand();			//Reveals/conceals own hand to player
 	void UpdateHand();			//Visual update of hand
+	void MakeBet(int amount);	//Make a bet with specified amount 
+	void UpdateBet(bool win);	//Win bet, lose bet depending on round result
 	Player(string tName, int Y);			//Player Constructor
 	Player();
 	~Player();
