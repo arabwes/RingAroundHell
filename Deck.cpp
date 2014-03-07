@@ -154,6 +154,7 @@ Card* Deck::DrawCard()
 {
 	if(deckInitialized)
 	{
+		PlaySound("CasinoSoundPackage\\cardPlace1.wav", NULL, SND_FILENAME | SND_ASYNC);
 		Card *tCard = deck.top();
 		deck.pop();
 		return tCard;

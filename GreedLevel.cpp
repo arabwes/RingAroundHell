@@ -14,8 +14,10 @@ GreedLevel::GreedLevel()
 	btnBetMinus = new Button(NULL);
 	player = new Player("Player", (int) GAME_HEIGHT*(0.8));
 	dealer = new Player("Dealer", 0);
-	playerPoints = new TextDX();
-	dealerPoints = new TextDX();
+	playerText = new TextDX();
+	dealerText = new TextDX();
+	betAmount = new TextDX();
+	betCount = 0;
 	timer = 0;
 }
 
@@ -33,8 +35,9 @@ GreedLevel::~GreedLevel()
 	btnMinusTexture.onLostDevice();
 	btnPlusTexture.onLostDevice();
 
-    safeDelete(playerPoints);
-	safeDelete(dealerPoints);
+    safeDelete(playerText);
+	safeDelete(dealerText);
+	safeDelete(betAmount);
 }
 
 //=============================================================================
@@ -48,11 +51,14 @@ void GreedLevel::initialize(HWND hwnd)
 	roundStart = false;
 	madeBets = false;
 	player->turn = true;
+
 	//Points
-	playerPoints->initialize(graphics, 48, false, false, "Arial");
-	playerPoints->setFontColor(graphicsNS::YELLOW);
-	dealerPoints->initialize(graphics, 48, false, false, "Arial");
-	dealerPoints->setFontColor(graphicsNS::BLUE);
+	playerText->initialize(graphics, 48, false, false, "Arial");
+	playerText->setFontColor(graphicsNS::YELLOW);
+	dealerText->initialize(graphics, 48, false, false, "Arial");
+	dealerText->setFontColor(graphicsNS::BLUE);
+	betAmount->initialize(graphics, 48, false, false, "Arial");
+	betAmount->setFontColor(graphicsNS::GREEN);
 
     // menu texture
     if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
@@ -64,10 +70,10 @@ void GreedLevel::initialize(HWND hwnd)
     if (!btnDoneTexture.initialize(graphics,"ArtAssets//Done.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
 	// End turn button texture
-    if (!btnPlusTexture.initialize(graphics,"ArtAssets//Done.png"))
+    if (!btnPlusTexture.initialize(graphics,"ArtAssets//Plus.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing plus button texture"));
 	// End turn button texture
-    if (!btnMinusTexture.initialize(graphics,"ArtAssets//Done.png"))
+    if (!btnMinusTexture.initialize(graphics,"ArtAssets//Minus.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing minus button texture"));
 	
 	// images
@@ -79,16 +85,20 @@ void GreedLevel::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing done button"));
 	if (!btnBetPlus->initialize(this, 25, 25, 1, &btnPlusTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
-	if (!btnBetMinus->initialize(this, 100, 50, 1, &btnMinusTexture))
+	if (!btnBetMinus->initialize(this, 25, 25, 1, &btnMinusTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
 	
-
+	//Set Button positions
 	btnHitMe->setX(GAME_WIDTH*(0.05));
 	btnDone->setX(GAME_WIDTH*(0.05));
 	btnHitMe->setY(GAME_HEIGHT*(0.4));
 	btnDone->setY(GAME_HEIGHT*(0.4) + btnDone->getHeight()*(1.1));
-	
-	
+
+	btnBetPlus->setX(GAME_WIDTH*(0.9));
+	btnBetMinus->setX(GAME_WIDTH*(0.9));
+	btnBetPlus->setY(GAME_HEIGHT*(0.5));
+	btnBetMinus->setY(GAME_HEIGHT*(0.5) + btnBetMinus->getHeight()*(1.1));
+
 	deck->Initialize(graphics);
 }
 
@@ -121,10 +131,12 @@ void GreedLevel::update()
 	{
 		if(btnBetPlus->Update())
 		{
+			PlaySound("CasinoSoundPackage\\chipsStack3.wav", NULL, SND_FILENAME | SND_ASYNC);
 			betCount++;
 		}
 		if(btnBetMinus->Update())
 		{
+			PlaySound("CasinoSoundPackage\\chipsStack4.wav", NULL, SND_FILENAME | SND_ASYNC);
 			betCount--;
 		}
 		if(btnDone->Update())
@@ -170,13 +182,17 @@ void GreedLevel::render()
 	menu.draw();
 	btnHitMe->draw();
 	btnDone->draw();
+	btnBetPlus->draw();
+	btnBetMinus->draw();
 	deck->draw();
 	
 	dealer->ShowHand();		//Draw dealer's hand
 	player->ShowHand();		//Draw player's hand
 
-	playerPoints->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.65);
-	playerPoints->print(to_string((long double)dealer->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.25);
+	playerText->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.65);
+	dealerText->print(to_string((long double)dealer->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.25);
+	playerText->print(to_string((long double)betCount), GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
+	
     graphics->spriteEnd();                  // end drawing sprites
 }
 

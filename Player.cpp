@@ -25,7 +25,7 @@ Player::Player(string tName, int Y)
 void Player::DrawCard(Card *tCard)
 {
 	hand.push_back(tCard);	//Push the card into the hand vector
-
+	
 	UpdateHand();
 }
 
