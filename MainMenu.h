@@ -15,8 +15,8 @@ class MainMenu : public Game
 {
 	private:
     // game items
-    TextureManager menuTexture, btnTextures; // textures
-    Image   menu;               // menu image
+    TextureManager splashScreenTexture, creditTexture, menuTexture, btnTextures; // textures
+    Image   menu, splashScreen, creditScreen;               // menu image
     TextDX  *dxFont;            // DirectX font
 	std::vector<Button*> buttons;
 	int clickedLvl;

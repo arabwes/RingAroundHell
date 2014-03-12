@@ -27,6 +27,10 @@ void MainMenu::initialize(HWND hwnd)
     Game::initialize(hwnd); // throws GameError
 
     // menu texture
+	if (!splashScreenTexture.initialize(graphics,"ArtAssets//SplashScreen.jpg"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+	if (!creditTexture.initialize(graphics,"ArtAssets//CreditScreen.jpg"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
     if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
 
@@ -37,7 +41,10 @@ void MainMenu::initialize(HWND hwnd)
     // menu image
     if (!menu.initialize(graphics,0,0,0,&menuTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
-
+	if (!splashScreen.initialize(graphics,0,0,0,&splashScreenTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing splash Screen"));
+	if (!creditScreen.initialize(graphics,0,0,0,&creditTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing splash Screen"));
 
 	Button *button;
 	for(int i = 0; i < 9; i++)
@@ -46,6 +53,7 @@ void MainMenu::initialize(HWND hwnd)
 		buttons.push_back(button);
 	}
 
+	startTime = GetTickCount();
     return;
 }
 
@@ -87,6 +95,10 @@ void MainMenu::render()
 		(*it)->draw();
 	}
 
+	if(GetTickCount() < startTime + 5000)
+		splashScreen.draw();
+	else if(GetTickCount() < startTime + 10000)
+		creditScreen.draw();
     graphics->spriteEnd();                  // end drawing sprites
 }
 
