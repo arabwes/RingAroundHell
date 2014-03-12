@@ -19,21 +19,25 @@ class GreedLevel : public Game
 	private:
     // game items
     TextureManager menuTexture, cardTextures, deckTexture, btnHitTexture, 
-		btnDoneTexture, btnPlusTexture, btnMinusTexture; // textures
+		btnDoneTexture, btnPlusTexture, btnMinusTexture, coinTexture; // textures
     Image   menu;               // menu image
     TextDX  *playerText, *dealerText, *betAmount;            // DirectX font
 	Deck *deck;						//Deck of cards
 	Player *player, *dealer;		//The player and dealer
 	Button *btnHitMe, *btnDone;		//Buttons to interact with level
 	Button *btnBetPlus, *btnBetMinus;
+	Entity *coin;
+	string roundText;
 	float timer;					//Timer to control timings
 	bool roundStart, madeBets;		//Flags 
 	int betCount;
-	int clickedLvl;					
+	int clickedLvl;			
+	char winner;
 	Card* CardFactory(int);
-	
+	bool roundOver;
 
 public:
+	
     // Constructor
     GreedLevel();
     // Destructor
@@ -48,6 +52,7 @@ public:
     void resetAll();
 
 	void beginRound();
+	void ConcludeRound();
 };
 
 #endif

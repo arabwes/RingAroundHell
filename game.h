@@ -49,6 +49,7 @@ protected:
     float   fps;                    // frames per second
     TextDX  dxFont;                 // DirectX font for fps
     bool    fpsOn;                  // true to display fps
+	DWORD	startTime;				// number of milli-seconds to time actions
     DWORD   sleepTime;              // number of milli-seconds to sleep between frames
     bool    paused;                 // true if game is paused
     bool    initialized;

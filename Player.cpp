@@ -18,7 +18,8 @@ Player::Player(string tName, int Y)
 	//dropped51 = false;
 	turn = false;
 	handY = Y;
-	
+	coins = 50;
+	bet = 0;
 }
 
 //The player adds a card to their hand
@@ -66,7 +67,7 @@ int Player::GetHandCount()
 
 void Player::MakeBet(int amount)
 {
-	bet = bet;
+	bet = amount;
 }
 
 void Player::UpdateBet(bool result)
@@ -79,4 +80,14 @@ void Player::UpdateBet(bool result)
 	{
 		coins -= bet;
 	}
+}
+
+int Player::GetCoins()
+{
+	return coins;
+}
+
+void Player::EmptyHand()
+{
+	hand.clear();
 }

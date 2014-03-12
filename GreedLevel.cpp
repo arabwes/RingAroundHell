@@ -17,6 +17,7 @@ GreedLevel::GreedLevel()
 	playerText = new TextDX();
 	dealerText = new TextDX();
 	betAmount = new TextDX();
+	coin = new Entity();
 	betCount = 0;
 	timer = 0;
 }
@@ -49,6 +50,7 @@ void GreedLevel::initialize(HWND hwnd)
     Game::initialize(hwnd); // throws GameError
 	srand(time(NULL));
 	roundStart = false;
+	roundOver = false;
 	madeBets = false;
 	player->turn = true;
 
@@ -63,7 +65,9 @@ void GreedLevel::initialize(HWND hwnd)
     // menu texture
     if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-    // Draw button texture
+    if (!coinTexture.initialize(graphics,"ArtAssets//copperCoin.png"))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+	// Draw button texture
     if (!btnHitTexture.initialize(graphics,"ArtAssets//HitMe.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
 	// End turn button texture
@@ -78,6 +82,8 @@ void GreedLevel::initialize(HWND hwnd)
 	
 	// images
     if (!menu.initialize(graphics,0,0,0,&menuTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+	if (!coin->initialize(this, 32, 25, 8, &coinTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
 	if (!btnHitMe->initialize(this, 100, 50, 1, &btnHitTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing hit button"));
@@ -98,7 +104,12 @@ void GreedLevel::initialize(HWND hwnd)
 	btnBetMinus->setX(GAME_WIDTH*(0.9));
 	btnBetPlus->setY(GAME_HEIGHT*(0.5));
 	btnBetMinus->setY(GAME_HEIGHT*(0.5) + btnBetMinus->getHeight()*(1.1));
-
+	
+	//Setup coin
+	coin->setFrames(0, 7);	
+	coin->setCurrentFrame(1);
+	coin->setX(GAME_WIDTH/5);
+	coin->setY(GAME_HEIGHT*.67);
 	deck->Initialize(graphics);
 }
 
@@ -141,10 +152,17 @@ void GreedLevel::update()
 		}
 		if(btnDone->Update())
 		{
+			player->MakeBet(betCount);
+			dealer->MakeBet(betCount);
 			madeBets = true;
 		}
 	}
 
+	if(roundOver)
+	{
+		ConcludeRound();
+	}
+	coin->update(frameTime*10);
 	dealer->UpdateHand();
 	player->UpdateHand();
 }
@@ -159,11 +177,21 @@ void GreedLevel::ai()
 	{
 		if(player->GetHandPoints() <= 21 && player->GetHandPoints() > dealer->GetHandPoints())
 		{
-			dealer->DrawCard(deck->DrawCard());
+
+			if(GetTickCount() > startTime + 1000)
+			{
+				startTime = GetTickCount();
+				dealer->DrawCard(deck->DrawCard());
+			}
+			
+		}
+		else if(GetTickCount() > startTime + 3000)
+		{
+			dealer->turn = false;
+			roundOver = true;
 		}
 	}
-	/*dealer->turn = false;
-	player->turn = true;*/
+	
 }
 
 //=============================================================================
@@ -180,18 +208,28 @@ void GreedLevel::render()
     graphics->spriteBegin();                // begin drawing sprites
 	
 	menu.draw();
-	btnHitMe->draw();
+	if(madeBets)
+	{
+		btnHitMe->draw();
+	}
 	btnDone->draw();
 	btnBetPlus->draw();
 	btnBetMinus->draw();
 	deck->draw();
-	
+	coin->draw();
+
 	dealer->ShowHand();		//Draw dealer's hand
 	player->ShowHand();		//Draw player's hand
 
 	playerText->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.65);
-	dealerText->print(to_string((long double)dealer->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.25);
+	playerText->print(to_string((long double)player->GetCoins()), GAME_WIDTH/4, GAME_HEIGHT*.65);
 	playerText->print(to_string((long double)betCount), GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
+	
+	if(roundOver)
+	{
+		dealerText->print(roundText, GAME_WIDTH/2, GAME_HEIGHT*.25);
+		Wait(3);
+	}
 	
     graphics->spriteEnd();                  // end drawing sprites
 }
@@ -222,15 +260,74 @@ void GreedLevel::resetAll()
 void GreedLevel::beginRound()
 {
 	
-	while(dealer->GetHandCount() < 2)
+	if(dealer->GetHandCount() < 2)
 	{
-		dealer->DrawCard(deck->DrawCard());		
+		if(GetTickCount() > startTime + 1000)
+		{
+			startTime = GetTickCount();
+			dealer->DrawCard(deck->DrawCard());
+		}
 	}
 
-	while(player->GetHandCount() < 2)
+	if(player->GetHandCount() < 2)
 	{
-		player->DrawCard(deck->DrawCard());				
+		if(GetTickCount() > startTime + 1000)
+		{
+			startTime = GetTickCount();
+			player->DrawCard(deck->DrawCard());	
+		}
 	}
-	
+	if(player->GetHandCount() == 2)
+	{
+		dealer->turn = false;
+		player->turn = true;
 		roundStart = true;
+	}
+}
+
+void GreedLevel::ConcludeRound()
+{
+	if(!dealer->turn && !player->turn)
+	{
+		if(player->GetHandPoints() > 21)
+		{
+			winner = 'D';
+		}
+		else if(dealer->GetHandPoints() > 21)
+		{
+			winner = 'P';
+		}
+		else if(player->GetHandPoints() > dealer->GetHandPoints())
+		{
+			winner = 'P';
+		}
+		else if(dealer->GetHandPoints() > player->GetHandPoints())
+		{
+			winner = 'D';
+		}
+	}
+
+	if(winner == 'P')
+	{
+
+		player->UpdateBet(true);
+		dealer->UpdateBet(false);
+		roundText = "You Win!";
+	}
+	else if(winner == 'D')
+	{
+		player->UpdateBet(false);
+		dealer->UpdateBet(true);
+		roundText = "You Lose!";
+	}
+
+	//Wait(3);
+	madeBets = false;
+	roundStart = false;
+	player->turn = true;
+	//Empty hands
+	player->EmptyHand();	
+	dealer->EmptyHand();
+	roundOver = false;
+
 }

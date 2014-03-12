@@ -21,6 +21,7 @@ Game::Game()
     console = NULL;
     messageDialog = NULL;
     inputDialog = NULL;
+	startTime = 0;
     fps = 100;
     fpsOn = false;              // default to fps display off
     initialized = false;
@@ -383,9 +384,9 @@ void Game::deleteAll()
 
 void Game::Wait(int seconds)
 {
-	DWORD startTime = GetTickCount();
+	startTime = GetTickCount();
 	while(GetTickCount() < (startTime + seconds*1000))
 	{
-
+		
 	}
 }
