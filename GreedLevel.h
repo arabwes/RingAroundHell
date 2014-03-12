@@ -20,7 +20,7 @@ class GreedLevel : public Game
     // game items
     TextureManager menuTexture, cardTextures, deckTexture, btnHitTexture, 
 		btnDoneTexture, btnPlusTexture, btnMinusTexture, coinTexture; // textures
-    Image   menu;               // menu image
+    Image   background;               // menu image
     TextDX  *playerText, *dealerText, *betAmount;            // DirectX font
 	Deck *deck;						//Deck of cards
 	Player *player, *dealer;		//The player and dealer
@@ -29,7 +29,7 @@ class GreedLevel : public Game
 	Entity *coin;
 	string roundText;
 	float timer;					//Timer to control timings
-	bool roundStart, madeBets;		//Flags 
+	bool roundStart, madeBets, results;		//Flags 
 	int betCount;
 	int clickedLvl;			
 	char winner;

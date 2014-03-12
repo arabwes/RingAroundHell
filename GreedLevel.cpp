@@ -62,11 +62,11 @@ void GreedLevel::initialize(HWND hwnd)
 	betAmount->initialize(graphics, 48, false, false, "Arial");
 	betAmount->setFontColor(graphicsNS::GREEN);
 
-    // menu texture
+    // background texture
     if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
     if (!coinTexture.initialize(graphics,"ArtAssets//copperCoin.png"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background texture"));
 	// Draw button texture
     if (!btnHitTexture.initialize(graphics,"ArtAssets//HitMe.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
@@ -81,18 +81,18 @@ void GreedLevel::initialize(HWND hwnd)
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing minus button texture"));
 	
 	// images
-    if (!menu.initialize(graphics,0,0,0,&menuTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+    if (!background.initialize(graphics,0,0,0,&menuTexture))
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	if (!coin->initialize(this, 32, 25, 8, &coinTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	if (!btnHitMe->initialize(this, 100, 50, 1, &btnHitTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing hit button"));
 	if (!btnDone->initialize(this, 100, 50, 1, &btnDoneTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing done button"));
 	if (!btnBetPlus->initialize(this, 25, 25, 1, &btnPlusTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	if (!btnBetMinus->initialize(this, 25, 25, 1, &btnMinusTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
+        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing background"));
 	
 	//Set Button positions
 	btnHitMe->setX(GAME_WIDTH*(0.05));
@@ -111,6 +111,8 @@ void GreedLevel::initialize(HWND hwnd)
 	coin->setX(GAME_WIDTH/5);
 	coin->setY(GAME_HEIGHT*.67);
 	deck->Initialize(graphics);
+
+	//Play music
 }
 
 //=============================================================================
@@ -140,12 +142,12 @@ void GreedLevel::update()
 	}
 	else
 	{
-		if(btnBetPlus->Update())
+		if(btnBetPlus->Update() && betCount < player->GetCoins())
 		{
 			PlaySound("CasinoSoundPackage\\chipsStack3.wav", NULL, SND_FILENAME | SND_ASYNC);
 			betCount++;
 		}
-		if(btnBetMinus->Update())
+		if(btnBetMinus->Update() && betCount > 0)
 		{
 			PlaySound("CasinoSoundPackage\\chipsStack4.wav", NULL, SND_FILENAME | SND_ASYNC);
 			betCount--;
@@ -162,7 +164,7 @@ void GreedLevel::update()
 	{
 		ConcludeRound();
 	}
-	coin->update(frameTime*10);
+	
 	dealer->UpdateHand();
 	player->UpdateHand();
 }
@@ -205,16 +207,21 @@ void GreedLevel::collisions()
 //=============================================================================
 void GreedLevel::render()
 {
+	coin->update(frameTime*10);
+
     graphics->spriteBegin();                // begin drawing sprites
 	
-	menu.draw();
+	background.draw();
 	if(madeBets)
 	{
 		btnHitMe->draw();
 	}
+	else
+	{
+		btnBetPlus->draw();
+		btnBetMinus->draw();
+	}
 	btnDone->draw();
-	btnBetPlus->draw();
-	btnBetMinus->draw();
 	deck->draw();
 	coin->draw();
 
@@ -225,10 +232,14 @@ void GreedLevel::render()
 	playerText->print(to_string((long double)player->GetCoins()), GAME_WIDTH/4, GAME_HEIGHT*.65);
 	playerText->print(to_string((long double)betCount), GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
 	
-	if(roundOver)
+	if(results)
 	{
-		dealerText->print(roundText, GAME_WIDTH/2, GAME_HEIGHT*.25);
-		Wait(3);
+		dealerText->print(roundText, GAME_WIDTH/3, GAME_HEIGHT*.25);
+		if(GetTickCount() > startTime + 3000)
+		{
+			paused = false;
+			results = false;
+		}
 	}
 	
     graphics->spriteEnd();                  // end drawing sprites
@@ -321,13 +332,15 @@ void GreedLevel::ConcludeRound()
 		roundText = "You Lose!";
 	}
 
-	//Wait(3);
 	madeBets = false;
 	roundStart = false;
+	results = true;
 	player->turn = true;
+	betCount = 0;
 	//Empty hands
 	player->EmptyHand();	
 	dealer->EmptyHand();
 	roundOver = false;
-
+	paused = true;
+	startTime = GetTickCount();
 }
