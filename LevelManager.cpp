@@ -4,6 +4,7 @@
 #include "MainMenu.h"
 #include "GreedLevel.h"
 #include "Level7.h"
+#include "FindIt.h"
 
 LevelManager::LevelManager()
 {	
@@ -115,7 +116,7 @@ Game* LevelManager::LevelFactory(int lvl)
 		tGame = new Spacewar;
 		break;
 	case 4:
-		tGame = new Level7();
+		tGame = new FindIt();
 		break;
 	default:
 		break;

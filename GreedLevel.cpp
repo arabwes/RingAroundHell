@@ -58,7 +58,7 @@ void GreedLevel::initialize(HWND hwnd)
 	playerText->initialize(graphics, 48, false, false, "Arial");
 	playerText->setFontColor(graphicsNS::YELLOW);
 	dealerText->initialize(graphics, 48, false, false, "Arial");
-	dealerText->setFontColor(graphicsNS::BLUE);
+	dealerText->setFontColor(graphicsNS::GREEN);
 	betAmount->initialize(graphics, 48, false, false, "Arial");
 	betAmount->setFontColor(graphicsNS::GREEN);
 
@@ -113,6 +113,8 @@ void GreedLevel::initialize(HWND hwnd)
 	deck->Initialize(graphics);
 
 	//Play music
+	PlaySound("audio\\Waiting.ogg", NULL, SND_FILENAME | SND_ASYNC);
+			
 }
 
 //=============================================================================

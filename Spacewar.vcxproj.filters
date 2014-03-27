@@ -46,7 +46,13 @@
     <Filter Include="Source Files\Level 7 - Violence">
       <UniqueIdentifier>{8b39f0f9-dd71-4822-85af-2025093053db}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Main Menu">
+    <Filter Include="Header Files\Level 8 - FindIt">
+      <UniqueIdentifier>{dd051a90-e320-4d19-8f9e-090ffaa7a758}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level 8 - FindIt">
+      <UniqueIdentifier>{3764ab1f-7542-43fe-a019-e9d2f050c20a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level 0 - Main Menu">
       <UniqueIdentifier>{e2c021ff-68b4-414c-ae2e-f67264cbb1d7}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -144,6 +150,12 @@
     <ClCompile Include="Deck.cpp">
       <Filter>Source Files\Level 4 - Greed</Filter>
     </ClCompile>
+    <ClCompile Include="FindIt.cpp">
+      <Filter>Source Files\Level 8 - FindIt</Filter>
+    </ClCompile>
+    <ClCompile Include="VisualSin.cpp">
+      <Filter>Source Files\Level 8 - FindIt</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -168,9 +180,6 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="graphics.h">
-      <Filter>Header Files\Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="image.h">
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="input.h">
@@ -207,10 +216,10 @@
       <Filter>Header Files\SpaceWar</Filter>
     </ClInclude>
     <ClInclude Include="MainMenu.h">
-      <Filter>Header Files\Main Menu</Filter>
+      <Filter>Header Files\Level 0 - Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
-      <Filter>Header Files\Main Menu</Filter>
+      <Filter>Header Files\Level 0 - Main Menu</Filter>
     </ClInclude>
     <ClInclude Include="GreedLevel.h">
       <Filter>Header Files\Level 4 - Greed</Filter>
@@ -247,6 +256,15 @@
     </ClInclude>
     <ClInclude Include="Deck.h">
       <Filter>Header Files\Level 4 - Greed</Filter>
+    </ClInclude>
+    <ClInclude Include="image.h">
+      <Filter>Header Files\Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="FindIt.h">
+      <Filter>Header Files\Level 8 - FindIt</Filter>
+    </ClInclude>
+    <ClInclude Include="VisualSin.h">
+      <Filter>Header Files\Level 8 - FindIt</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

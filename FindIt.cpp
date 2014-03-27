@@ -1,10 +1,10 @@
-#include"MainMenu.h"
+#include"FindIt.h"
 #include"LevelManager.h"
 
 //=============================================================================
 // Constructor
 //=============================================================================
-MainMenu::MainMenu()
+FindIt::FindIt()
 {
     dxFont = new TextDX();  // DirectX font
 }
@@ -12,7 +12,7 @@ MainMenu::MainMenu()
 //=============================================================================
 // Destructor
 //=============================================================================
-MainMenu::~MainMenu()
+FindIt::~FindIt()
 {
     releaseAll();           // call onLostDevice() for every graphics item
     safeDelete(dxFont);
@@ -22,83 +22,74 @@ MainMenu::~MainMenu()
 // Initializes the game
 // Throws GameError on error
 //=============================================================================
-void MainMenu::initialize(HWND hwnd)
+void FindIt::initialize(HWND hwnd)
 {
     Game::initialize(hwnd); // throws GameError
 
     // menu texture
-	if (!splashScreenTexture.initialize(graphics,"ArtAssets//SplashScreen.jpg"))
+	if (!backGroundTexture.initialize(graphics,"ArtAssets//SeaFloor.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-	if (!creditTexture.initialize(graphics,"ArtAssets//CreditScreen.jpg"))
+	if (!sinTextures.initialize(graphics,"ArtAssets//FishSprites.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-    if (!menuTexture.initialize(graphics,"pictures//HellAbyss.jpg"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-
-	// button game textures
-    if (!btnTextures.initialize(graphics,"pictures\\Buttons.png"))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button textures"));
-
-    // menu image
-    if (!menu.initialize(graphics,0,0,0,&menuTexture))
+	
+	if (!background.initialize(graphics,0,0,0,&backGroundTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
-	if (!splashScreen.initialize(graphics,0,0,0,&splashScreenTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing splash Screen"));
-	if (!creditScreen.initialize(graphics,0,0,0,&creditTexture))
-        throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing splash Screen"));
+	
 
-	Button *button;
-	for(int i = 0; i < 9; i++)
+	for(int i = 0; i < 4; i++)
 	{
-		button = ButtonFactory(i);
-		buttons.push_back(button);
+		sins.push_back(SinFactory((int)rand()%9+1));
 	}
-
 	startTime = GetTickCount();
-    return;
 }
 
 //=============================================================================
 // Update all game items
 //=============================================================================
-void MainMenu::update()
+void FindIt::update()
 {
-	std::vector<Button*>::iterator it;
-	for(it = buttons.begin(); it < buttons.end(); it++)
+	std::vector<VisualSin *>::iterator sinIt;
+	for(sinIt = sins.begin(); sinIt != sins.end(); )
 	{
-		(*it)->Update();
+		if((*sinIt)->Update())
+		{
+			delete (*sinIt);
+			sinIt = sins.erase(sinIt);
+		}
+		else
+		{
+			++sinIt;
+		}
 	}
 }
 
 //=============================================================================
 // Artificial Intelligence
 //=============================================================================
-void MainMenu::ai()
+void FindIt::ai()
 {}
 
 //=============================================================================
 // Handle collisions
 //=============================================================================
-void MainMenu::collisions()
+void FindIt::collisions()
 {}
 
 //=============================================================================
 // Render game items
 //=============================================================================
-void MainMenu::render()
+void FindIt::render()
 {
     graphics->spriteBegin();                // begin drawing sprites
 
-	menu.draw();
-	std::vector<Button*>::iterator it;
-	for(it = buttons.begin(); it < buttons.end(); it++)
+	background.draw();
+
+	std::vector<VisualSin*>::iterator sinIt;
+	for(sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
 	{
-		(*it)->draw();
+		(*sinIt)->draw();
 	}
 
-	if(GetTickCount() < startTime + 1000)
-		splashScreen.draw();
-	else if(GetTickCount() < startTime + 2000)
-		creditScreen.draw();
     graphics->spriteEnd();                  // end drawing sprites
 }
 
@@ -106,10 +97,11 @@ void MainMenu::render()
 // The graphics device was lost.
 // Release all reserved video memory so graphics device may be reset.
 //=============================================================================
-void MainMenu::releaseAll()
+void FindIt::releaseAll()
 {
     dxFont->onLostDevice();
-    menuTexture.onLostDevice();
+    backGroundTexture.onLostDevice();
+    sinTextures.onLostDevice();
     Game::releaseAll();
     return;
 }
@@ -118,24 +110,26 @@ void MainMenu::releaseAll()
 // The grahics device has been reset.
 // Recreate all surfaces.
 //=============================================================================
-void MainMenu::resetAll()
+void FindIt::resetAll()
 {
-    menuTexture.onResetDevice();
-    dxFont->onResetDevice();
+    backGroundTexture.onResetDevice();
+    sinTextures.onResetDevice();
+	dxFont->onResetDevice();
     Game::resetAll();
     return;
 }
 
-Button* MainMenu::ButtonFactory(int i)
+
+VisualSin* FindIt::SinFactory(int i)
 {
-	Button * btn;
-	btn = new Button(i+1);
+	VisualSin * sin;
+	sin = new VisualSin();
 	//Offsets so that buttons draw in the center of the screen
 	int wOffset = GAME_WIDTH/2 - 150;		//Offset from the left where buttons start drawing
 	int hOffset = GAME_HEIGHT/2 - 150;		//Offset from the top where buttons start drawing
 
-	if(!btn->initialize(this, 100, 100, 3, &btnTextures))
-			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing button texture"));
+	if(!sin->initialize(this, 100, 100, 8, &sinTextures))
+			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing sin texture"));
 	int row = 0;
 	//Positions of the buttons
 	float tX = wOffset + 100*(i%3);	
@@ -154,28 +148,9 @@ Button* MainMenu::ButtonFactory(int i)
 
 	float tY = hOffset + 100*(row);
 
-	btn->setFrames(i, i);
-	btn->setCurrentFrame(i);
-	btn->setX(tX);
-	btn->setY(tY);
-	return btn;
-}
-
-int MainMenu::UpdateLevel(int lvl)
-{
-	return lvl;
-}
-
-int MainMenu::ButtonListener()
-{
-	std::vector<Button*>::iterator it;
-	for(it = buttons.begin(); it < buttons.end(); it++)
-	{
-		if((*it)->Update())
-		{
-			return (*it)->GetBtnLevel();
-		}
-	}
-	return 0;
-
+	sin->setFrames(i, i);
+	sin->setCurrentFrame(i);
+	sin->setX(tX);
+	sin->setY(tY);
+	return sin;
 }
