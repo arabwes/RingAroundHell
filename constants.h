@@ -136,12 +136,12 @@ inline void safeOnResetDevice(T& ptr)
 }
 #define SAFE_ON_RESET_DEVICE safeOnResetDevice  // for backward compatiblility
 
-//void CombineString(string &TempString,string Letter1, string Letter2, int Number)
-//{
-//	stringstream SStm;
-//	
-//	SStm << Letter1 << Number << Letter2;
-//	TempString = SStm.str();
-//}
+inline void CombineString(string &TempString,string Letter1, string Letter2, int Number)
+{
+	stringstream SStm;
+	
+	SStm << Letter1 << Number << Letter2;
+	TempString = SStm.str();
+}
 
 #endif

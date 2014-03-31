@@ -10,7 +10,7 @@
 #include <vector>
 #include <stack>
 
-void CombineString(string &TempString,string Letter1, string Letter2, int Number);
+//void CombineString(string &TempString,string Letter1, string Letter2, int Number);
 
 class Deck : public Entity
 {

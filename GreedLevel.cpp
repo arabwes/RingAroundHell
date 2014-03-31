@@ -229,10 +229,13 @@ void GreedLevel::render()
 
 	dealer->ShowHand();		//Draw dealer's hand
 	player->ShowHand();		//Draw player's hand
-
-	playerText->print(to_string((long double)player->GetHandPoints()), GAME_WIDTH/2, GAME_HEIGHT*.65);
-	playerText->print(to_string((long double)player->GetCoins()), GAME_WIDTH/4, GAME_HEIGHT*.65);
-	playerText->print(to_string((long double)betCount), GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
+	string tText;
+	CombineString(tText, "", "", player->GetHandPoints());
+	playerText->print(tText, GAME_WIDTH/2, GAME_HEIGHT*.65);
+	CombineString(tText, "", "", player->GetCoins());
+	playerText->print(tText, GAME_WIDTH/4, GAME_HEIGHT*.65);
+	CombineString(tText, "", "", betCount);
+	playerText->print(tText, GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
 	
 	if(results)
 	{

@@ -18,11 +18,13 @@ class FindIt : public Game
     // game items
     TextureManager backGroundTexture, sinTextures; // textures
     Image   background;               // menu image
-    TextDX  *dxFont;            // DirectX font
-	VisualSin* findThisSin;
+    TextDX  *dxText;            // DirectX font
+	VisualSin* targetSin, *targetImage;
 	std::vector<VisualSin*> sins;
 	float time;					//Timer to track time remaining
 	int level;					//current level of the game
+	int numFish;				//Number of current non-target fish of level
+	string timer;
 
 public:
     // Constructor
@@ -38,6 +40,8 @@ public:
     void releaseAll();
     void resetAll();
 	VisualSin* SinFactory(int);
+	void NewRound();
+	//void RecordScore();
 };
 
 #endif

@@ -5,5 +5,7 @@
 class VisualSin : public Button
 {
 public:
-	void Move();
+	VisualSin();
+	~VisualSin();
+	void Move(float frameTime);
 };

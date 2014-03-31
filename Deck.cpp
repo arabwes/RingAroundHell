@@ -177,10 +177,10 @@ void Deck::ShuffleCards()
 	}
 }
 
-void CombineString(string &tString,string Letter1, string Letter2, int Number)
-{
-	stringstream SStm;
-	
-	SStm << Letter1 << Number << Letter2;
-	tString = SStm.str();
-}
+//void CombineString(string &tString,string Letter1, string Letter2, int Number)
+//{
+//	stringstream SStm;
+//	
+//	SStm << Letter1 << Number << Letter2;
+//	tString = SStm.str();
+//}
