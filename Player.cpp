@@ -43,6 +43,10 @@ void Player::UpdateHand()
 		(*handIt)->Reposition(NewX + GAME_WIDTH/4, handY);
 		(*handIt)->CardUpdate();
 		currentPoints += (*handIt)->GetValue();
+		if ((*handIt)->GetName() == "Ace" && currentPoints > 21)
+		{
+			(*handIt)->SetValue(1);
+		}
 	}
 }
 

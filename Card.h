@@ -30,6 +30,7 @@ public:
 	string GetFullName();	// Returns FullName of card
 	bool Selected;			// Flag to recognize if a card has been selected or not
 	int GetValue();			// Returns Value of card
+	void SetValue(int);		// Set value of card
 	void UpdateFace(bool ShowFace);
 	void Initialize(Graphics *graphics, Game * game);
 	void CardUpdate();

@@ -156,6 +156,9 @@
     <ClCompile Include="VisualSin.cpp">
       <Filter>Source Files\Level 8 - FindIt</Filter>
     </ClCompile>
+    <ClCompile Include="LevelConstruction.cpp">
+      <Filter>Source Files\Engine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="audio.h">
@@ -265,6 +268,9 @@
     </ClInclude>
     <ClInclude Include="VisualSin.h">
       <Filter>Header Files\Level 8 - FindIt</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelConstruction.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

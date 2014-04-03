@@ -1,6 +1,7 @@
 #include "LevelManager.h"
 #include "spacewar.h"
 #include "Purgatory.h"
+#include "LevelConstruction.h"
 #include "MainMenu.h"
 #include "GreedLevel.h"
 #include "Level7.h"
@@ -10,9 +11,10 @@ LevelManager::LevelManager()
 {	
 	//Initialize();
 	//To add more levels change numOfLvls and edit LevelFactory
+	//The levels start at level 0 (main menu) and increase to level 9
 	currentLvlNum = 0;
-	numOfLvls = 5;
-	for(int i = 0; i < numOfLvls; i++)
+	numOfLvls = 9;
+	for(int i = 0; i <= numOfLvls; i++)
 	{
 		levels.push_back(LevelFactory(i));
 	}
@@ -53,8 +55,10 @@ void LevelManager::GoToLevel(int lvlNumber)
 		levels[currentLvlNum] = LevelFactory(currentLvlNum);
 	}
 	currentLvlNum = lvlNumber;			//Track current level number
-	currentLevel = levels[lvlNumber];	//Point to the new level
-	currentLevel->initialize(hwnd);		//Initialize new level
+
+		currentLevel = levels[lvlNumber];	//Point to the new level
+		currentLevel->initialize(hwnd);		//Initialize new level
+	
 }
 
 int LevelManager::getCurrentLevel()
@@ -99,6 +103,7 @@ void LevelManager::Update(HWND hd)
 Game* LevelManager::LevelFactory(int lvl)
 {
 	//To add more levels, just make a new case and put in the constructor as done in the first 2
+	//The case number is equivalent to the level number
 
 	Game * tGame;
 	switch(lvl)
@@ -106,19 +111,20 @@ Game* LevelManager::LevelFactory(int lvl)
 	case 0:
 		tGame = new MainMenu();
 		break;
-	case 1:
+	/*case 1:
 		tGame = new Purgatory();
-		break;
-	case 2:
+		break;*/
+	case 4:
 		tGame = new GreedLevel();
 		break;
-	case 3:
+	/*case 3:
 		tGame = new Spacewar;
-		break;
-	case 4:
+		break;*/
+	case 8:
 		tGame = new FindIt();
 		break;
 	default:
+		tGame = new LevelConstruction();
 		break;
 	};
 

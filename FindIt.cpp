@@ -66,6 +66,18 @@ void FindIt::update()
 		startTime = GetTickCount();			//The timer goes down every second
 		time--;
 	}
+
+	//If the target is found, then start the new level
+	if (targetSin->Update())
+	{
+		time += 5;
+		if (time > 50)
+		{
+			time = 50;
+		}
+		level++;
+		NewRound();
+	}
 	std::vector<VisualSin *>::iterator sinIt;
 	for(sinIt = sins.begin(); sinIt != sins.end(); )
 	{
@@ -86,17 +98,7 @@ void FindIt::update()
 	targetSin->update(frameTime * 4);
 	targetSin->Move(frameTime);
 
-	//If the target is found, then start the new level
-	if (targetSin->Update())
-	{
-		time += 5;
-		if (time > 50)
-		{
-			time = 50;
-		}
-		level++;
-		NewRound();
-	}
+
 
 	if (time <= 0)
 	{
@@ -132,6 +134,10 @@ void FindIt::render()
 	for(sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
 	{
 		(*sinIt)->draw();
+		if ((*sinIt)->Update())
+		{
+			dxText->print("-5", (*sinIt)->getCenterX(), (*sinIt)->getCenterY());
+		}
 	}
 	targetSin->draw();
 
@@ -211,7 +217,7 @@ void FindIt::NewRound()
 
 	int tNum = (int)((rand() % 4) + 12) * 2;	//Generate random number for target sin
 	targetSin = SinFactory(tNum);				//Create target sin
-	//sins.push_back(targetSin);					//Insert target sin first so it is always rendered in the back
+
 	for (int i = 0; i < numFish; i++)
 	{
 		sins.push_back(SinFactory((int)((rand() % 12) * 2)));	//create a bunch more sins and add to vector

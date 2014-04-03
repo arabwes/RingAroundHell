@@ -46,17 +46,23 @@ void Card::Initialize(Graphics *graphics, Game* game)
 
 void Card::UpdateFace(bool showFace)
 {
-	if(showFace)
-		//!showFace;
+	if (showFace)
+	{
 		this->setTextureManager(texManFront);
-		//Texture = LoadTexture(FileName, TransColor);
+	}
 	else
+	{
 		this->setTextureManager(texManBack);
-		//Texture = LoadTexture(FacedownFileName, TransColor);
+	}
 }
 int Card::GetValue()
 {
 	return value;
+}
+
+void Card::SetValue(int tVal)
+{
+	value = tVal;
 }
 
 string Card::GetSuit()
@@ -100,4 +106,5 @@ void Card::CardUpdate()
 	{
 		spriteData.y--;
 	}
+
 }

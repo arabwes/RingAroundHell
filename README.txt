@@ -15,8 +15,8 @@ Level 3: N/A
 Level 4: Gambling/Blackjack - You are given an amount of coins, see how many rounds you'll last
 Level 5: N/A
 Level 6: N/A
-Level 7: RPG style fighting - You are faced against a demon, Fight To Survive!
-Level 8: N/A
+Level 7: N/A
+Level 8: Find It! - Find the targetted sin amoung the pool of other sins before time runs out.
 Level 9: N/A
 
 
@@ -26,11 +26,10 @@ There are 2 competing groups of 3.
 
 
 This group is comprised of:
-	Wasim Nasir - Team leader, Lead Programmer
-	Alex Clerveaux - Programmer
-	Anthony Cruz - Programmer
+	Wasim Nasir - Team leader, Lead Programmer, Game designer
 
 Unconditional assistance by:
+	Brandon Schooner - Artist - schoonerbe.wix.com/reddotgames
 	Jahron Ward - Artist -  http://jahronward.wix.com/portfolio
 	Sujey Rivera - Artist
 	Leo Valdez - Artist
@@ -38,7 +37,7 @@ Unconditional assistance by:
 Current status of game:	In-Progress
 
 	Deadline:
-		March 10th - Project must be presented
+		May 10th - Project must be presented
 	Goals:
 		Completely develop the 3 currently designed levels. 
 		Debug all levels and increase entertainment value

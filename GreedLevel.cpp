@@ -237,6 +237,12 @@ void GreedLevel::render()
 	CombineString(tText, "", "", betCount);
 	playerText->print(tText, GAME_WIDTH*(0.89), GAME_HEIGHT*(0.4));
 	
+	if (dealer->turn)
+	{
+		CombineString(tText, "", "", dealer->GetHandPoints());
+		dealerText->print(tText, GAME_WIDTH / 3, GAME_HEIGHT*.25);
+	}
+
 	if(results)
 	{
 		dealerText->print(roundText, GAME_WIDTH/3, GAME_HEIGHT*.25);

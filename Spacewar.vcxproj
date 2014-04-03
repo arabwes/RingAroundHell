@@ -108,6 +108,7 @@
     <ClCompile Include="inputDialog.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Level7.cpp" />
+    <ClCompile Include="LevelConstruction.cpp" />
     <ClCompile Include="LevelManager.cpp" />
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="messageDialog.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="inputDialog.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Level7.h" />
+    <ClInclude Include="LevelConstruction.h" />
     <ClInclude Include="LevelManager.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="messageDialog.h" />

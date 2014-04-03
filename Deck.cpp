@@ -29,7 +29,7 @@ Deck::Deck(Game* level) : Entity()
 			case 1:
 				tFName = "Ace of " + tSuit;
 				tName = "Ace";
-				tVal = 1;
+				tVal = 11;
 				tNum = i;
 				break;
 			case 2:
