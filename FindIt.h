@@ -21,9 +21,10 @@ class FindIt : public Game
     TextDX  *dxText;            // DirectX font
 	VisualSin* targetSin, *targetImage;
 	std::vector<VisualSin*> sins;
-	float time;					//Timer to track time remaining
+	float time, tTimer;					//Timer to track time remaining
 	int level;					//current level of the game
 	int numFish;				//Number of current non-target fish of level
+	bool isTimeChanged;			//True when time is either increasing or decreasing
 	string timer;
 
 public:

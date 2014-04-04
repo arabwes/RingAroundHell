@@ -117,9 +117,9 @@ Game* LevelManager::LevelFactory(int lvl)
 	case 4:
 		tGame = new GreedLevel();
 		break;
-	/*case 3:
+	case 3:
 		tGame = new Spacewar;
-		break;*/
+		break;
 	case 8:
 		tGame = new FindIt();
 		break;

@@ -10,6 +10,7 @@ FindIt::FindIt()
 	time = 30;
 	level = 1;
 	numFish = 8;
+	isTimeChanged = false;
 }
 
 //=============================================================================
@@ -88,6 +89,8 @@ void FindIt::update()
 			delete (*sinIt);
 			time -= 5;
 			sinIt = sins.erase(sinIt);
+			isTimeChanged = true;
+			tTimer = GetTickCount();
 			break; 
 		}
 		else
@@ -98,7 +101,10 @@ void FindIt::update()
 	targetSin->update(frameTime * 4);
 	targetSin->Move(frameTime);
 
-
+	if (isTimeChanged && GetTickCount() > tTimer + 300)
+	{
+		isTimeChanged = false;
+	}
 
 	if (time <= 0)
 	{
@@ -134,15 +140,17 @@ void FindIt::render()
 	for(sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
 	{
 		(*sinIt)->draw();
-		if ((*sinIt)->Update())
-		{
-			dxText->print("-5", (*sinIt)->getCenterX(), (*sinIt)->getCenterY());
-		}
+		
 	}
 	targetSin->draw();
 
 	CombineString(timer, "Time: ", " ", (int)time);
 	dxText->print(timer, GAME_WIDTH *0.01, GAME_HEIGHT*0.1);
+
+	if (isTimeChanged)
+	{
+		dxText->print("-5", GAME_WIDTH *0.15, GAME_HEIGHT*0.18);
+	}
 	CombineString(timer, "Level: ", "", level);
 	dxText->print(timer, GAME_WIDTH *0.7, GAME_HEIGHT*0.1);
 	dxText->print("FIND!", GAME_WIDTH*0.4, GAME_HEIGHT*0.01);
