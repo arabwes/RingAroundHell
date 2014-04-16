@@ -11,6 +11,7 @@ FindIt::FindIt()
 	level = 1;
 	numFish = 8;
 	isTimeChanged = false;
+	isFound = false;
 }
 
 //=============================================================================
@@ -34,20 +35,20 @@ void FindIt::initialize(HWND hwnd)
 	dxText->setFontColor(graphicsNS::CYAN);
 
     // menu texture
-	if (!backGroundTexture.initialize(graphics,"ArtAssets//SeaFloor2.png"))
+	if (!backGroundTexture.initialize(graphics,"ArtAssets//HellScape1.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
-	if (!sinTextures.initialize(graphics,"ArtAssets//FishSprites.png"))
+	if (!sinTextures.initialize(graphics,"ArtAssets//SkullSprites.png"))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu texture"));
 	if (!background.initialize(graphics,0,0,0,&backGroundTexture))
         throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing menu"));
 	
 	
-	int tNum = (int)((rand() % 4) + 12) * 2;	//Generate random number for target sin
+	int tNum = (int)((rand() % 3));	//Generate random number for target sin
 	targetSin = SinFactory(tNum);				//Create target sin
 	//sins.push_back(targetSin);					//Insert target sin first so it is always rendered in the back
 	for(int i = 0; i < numFish; i++)
 	{
-		sins.push_back(SinFactory((int)((rand()%12)*2)));	//create a bunch more sins and add to vector
+		sins.push_back(SinFactory((int)((rand()%6))));	//create a bunch more sins and add to vector
 	}
 
 	targetImage = SinFactory(tNum);				//Make a copy of targetSin so it's image can be 
@@ -62,12 +63,6 @@ void FindIt::initialize(HWND hwnd)
 //=============================================================================
 void FindIt::update()
 {
-	if (GetTickCount() > startTime + 1000)
-	{
-		startTime = GetTickCount();			//The timer goes down every second
-		time--;
-	}
-
 	//If the target is found, then start the new level
 	if (targetSin->Update())
 	{
@@ -77,30 +72,58 @@ void FindIt::update()
 			time = 50;
 		}
 		level++;
-		NewRound();
+		//NewRound();
+		isFound = true;
 	}
-	std::vector<VisualSin *>::iterator sinIt;
-	for(sinIt = sins.begin(); sinIt != sins.end(); )
+	if (!isFound)
 	{
-		(*sinIt)->update(frameTime * 4);
-		(*sinIt)->Move(frameTime);
-		if((*sinIt)->Update())
+		if (GetTickCount() > startTime + 1000)
+		{
+			startTime = GetTickCount();			//The timer goes down every second
+			time--;
+		}
+		std::vector<VisualSin *>::iterator sinIt;
+		for (sinIt = sins.begin(); sinIt != sins.end();)
+		{
+			(*sinIt)->update(frameTime * 4);
+			(*sinIt)->Move(frameTime);
+			if ((*sinIt)->Update())
+			{
+				delete (*sinIt);
+				time -= 5;
+				sinIt = sins.erase(sinIt);
+				isTimeChanged = true;
+				tTimer = GetTickCount();
+				break;
+			}
+			else
+			{
+				++sinIt;
+			}
+		}
+		
+		targetSin->Move(frameTime);
+	}
+	else
+	{
+		//Delete all non-target sins
+		std::vector<VisualSin*>::iterator sinIt;
+		for (sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
 		{
 			delete (*sinIt);
-			time -= 5;
-			sinIt = sins.erase(sinIt);
-			isTimeChanged = true;
-			tTimer = GetTickCount();
-			break; 
 		}
-		else
+		sins.clear();
+
+		//Pause 2 seconds and then move onto the next level
+		if (GetTickCount() > startTime + 2000)
 		{
-			++sinIt;
+			startTime = GetTickCount();			//The timer goes down every second
+			isFound = false;
+			NewRound();
 		}
 	}
+	
 	targetSin->update(frameTime * 4);
-	targetSin->Move(frameTime);
-
 	if (isTimeChanged && GetTickCount() > tTimer + 300)
 	{
 		isTimeChanged = false;
@@ -135,14 +158,14 @@ void FindIt::render()
     graphics->spriteBegin();                // begin drawing sprites
 
 	background.draw();
-	
+
+	targetSin->draw();
 	std::vector<VisualSin*>::iterator sinIt;
 	for(sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
 	{
 		(*sinIt)->draw();
 		
 	}
-	targetSin->draw();
 
 	CombineString(timer, "Time: ", " ", (int)time);
 	dxText->print(timer, GAME_WIDTH *0.01, GAME_HEIGHT*0.1);
@@ -190,14 +213,14 @@ VisualSin* FindIt::SinFactory(int i)
 	VisualSin * sin;
 	sin = new VisualSin();
 
-	if(!sin->initialize(this, 100, 100, 8, &sinTextures))
+	if(!sin->initialize(this, 100, 100, 3, &sinTextures))
 			throw(GameError(gameErrorNS::FATAL_ERROR, "Error initializing sin texture"));
 
 	//Positions of the buttons
 	float tX = rand() % (GAME_WIDTH - 100);
 	float tY = rand() % ((int)(GAME_HEIGHT * 0.8) - 100) + GAME_HEIGHT*0.2;
 
-	sin->setFrames(i, i+1);
+	sin->setFrames(i, i);
 	sin->setCurrentFrame(i);
 	sin->setX(tX);
 	sin->setY(tY);
@@ -216,19 +239,12 @@ void FindIt::NewRound()
 		numFish = 50;
 	}
 
-	std::vector<VisualSin*>::iterator sinIt;
-	for (sinIt = sins.begin(); sinIt != sins.end(); sinIt++)
-	{
-		delete (*sinIt);
-	}
-	sins.clear();
-
-	int tNum = (int)((rand() % 4) + 12) * 2;	//Generate random number for target sin
+	int tNum = (int)((rand() % 4));	//Generate random number for target sin
 	targetSin = SinFactory(tNum);				//Create target sin
 
 	for (int i = 0; i < numFish; i++)
 	{
-		sins.push_back(SinFactory((int)((rand() % 12) * 2)));	//create a bunch more sins and add to vector
+		sins.push_back(SinFactory((int)((rand() % 6))));	//create a bunch more sins and add to vector
 	}
 
 	targetImage = SinFactory(tNum);				//Make a copy of targetSin so it's image can be 

@@ -24,7 +24,8 @@ class FindIt : public Game
 	float time, tTimer;					//Timer to track time remaining
 	int level;					//current level of the game
 	int numFish;				//Number of current non-target fish of level
-	bool isTimeChanged;			//True when time is either increasing or decreasing
+	bool isTimeChanged,			//True when time is either increasing or decreasing
+		isFound;				//True when the target is found
 	string timer;
 
 public:

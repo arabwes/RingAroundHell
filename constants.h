@@ -21,7 +21,7 @@ using namespace std;
 //=============================================================================
 
 // window
-const char CLASS_NAME[] = "Spacewar";
+const char CLASS_NAME[] = "Spacewar"; 
 const char GAME_TITLE[] = "Spacewar v1.2";
 const bool FULLSCREEN = false;              // windowed or fullscreen
 const UINT GAME_WIDTH =  640;               // width of game in pixels
